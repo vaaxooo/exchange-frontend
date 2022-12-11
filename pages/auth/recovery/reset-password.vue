@@ -43,11 +43,6 @@ export default {
 			loading: false
 		}
 	},
-	created() {
-		if(!this.$route.query.hasOwnProperty('code')) {
-			this.$router.push('/');
-		}
-	},
 	methods: {
 		async send() {
 			this.errors = [];
