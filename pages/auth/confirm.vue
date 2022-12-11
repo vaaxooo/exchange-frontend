@@ -39,7 +39,7 @@ export default {
 	methods: {
 		async confirm() {
 			this.loading = true
-			const response = (await this.$axios.$post('/auth/verification/send', {
+			const response = (await this.$axios.$post('/auth/verification/check', {
 					code: this.code,
 				})).data
 			if(response.status === 200) {
