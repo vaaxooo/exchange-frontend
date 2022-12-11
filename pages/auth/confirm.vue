@@ -42,7 +42,7 @@ export default {
 			const response = (await this.$axios.$post('/auth/verification/check', {
 					code: this.code,
 				})).data
-			if(response.status === 200) {
+			if(response.code === 200) {
 				this.$toast.success('Почта успешно подтверждена')
 				this.$router.push('/')
 			} else {
