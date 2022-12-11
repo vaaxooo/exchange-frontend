@@ -17,7 +17,7 @@
 						<div class="login-block__form__item">
 							<label>Повторите пароль</label>
 							<input type="password" class="form-control" id="confirm_password" v-model="confirm_password" :class="{'is-invalid': errors.confirm_password}">
-							<span v-if="errors.confirm_password" class="text-danger">{{ errors.confirm_password[0] }}</span>
+							<span v-if="errors.confirm_password" class="text-danger">{{ errors.confirm_password }}</span>
 						</div>
 						<div class="login-block__form__item">
 							<button type="submit" class="btn btn-dark btn-block" @click="send">Изменить</button>
@@ -45,7 +45,7 @@ export default {
 	},
 	methods: {
 		async send() {
-			if(this.password !== this.confirm_password) {
+			if(this.new_password !== this.confirm_password) {
 				this.errors = {
 					confirm_password: 'Пароли не совпадают'
 				}
