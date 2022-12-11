@@ -40,7 +40,7 @@ export default {
 	methods: {
 		async confirm() {
 			this.loading = true
-			const response = (await this.$axios.$post('/auth/verification/check', {
+			const response = (await this.$axios.post('/auth/verification/check', {
 					code: this.code,
 				})).data
 			if(response.code === 200) {
@@ -54,7 +54,7 @@ export default {
 
 		async sendCode() {
 			this.loading = true
-			const response = (await this.$axios.$post('/auth/verification/send', {
+			const response = (await this.$axios.post('/auth/verification/send', {
 					code: this.code,
 				})).data
 			if(response.code === 200) {
