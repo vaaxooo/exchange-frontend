@@ -11,6 +11,7 @@
 						<div class="login-block__form__item">
 							<label>Введите полученный код</label>
 							<input type="email" class="form-control" name="code" placeholder="Код подтверждения" v-model="code">
+							<a href="#" class="small-text my-1" @click="sendCode">Отправить код повторно</a>
 						</div>
 						<div class="login-block__form__item">
 							<button type="submit" class="btn btn-dark btn-block" @click="confirm">Подтвердить</button>
@@ -50,6 +51,19 @@ export default {
 			}
 			this.loading = false
 		},
+
+		async sendCode() {
+			this.loading = true
+			const response = (await this.$axios.$post('/auth/verification/send', {
+					code: this.code,
+				})).data
+			if(response.code === 200) {
+				this.$toast.success('Код успешно отправлен')
+			} else {
+				this.$toast.error('Ошибка при отправке кода')
+			}
+			this.loading = false
+		}
 	},
 }
 
