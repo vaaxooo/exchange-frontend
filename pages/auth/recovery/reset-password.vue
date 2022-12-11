@@ -45,12 +45,23 @@ export default {
 	},
 	methods: {
 		async send() {
+			if(this.password !== this.confirm_password) {
+				this.errors = {
+					confirm_password: 'Пароли не совпадают'
+				}
+				return;
+			}
+
+			if(!this.$route.query.email || !this.$route.query.code) {
+				this.$router.push('/')
+			}
+
 			this.errors = [];
 			this.loading = true;
 			const response = (await this.$axios.post('/auth/password/reset', {
-				new_password: this.new_password,
-				confirm_password: this.confirm_password,
-				reset_code: this.$route.query.code
+				password: this.new_password,
+				email: this.$route.query.email,
+				code: this.$route.query.code
 			})).data;
 			if (response.code === 200) {
 				this.$toast.success(response.message);
