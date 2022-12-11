@@ -44,7 +44,7 @@ export default {
 		}
 	},
 	created() {
-		if(!this.$route.query.hasOwnProperty('hash')) {
+		if(!this.$route.query.hasOwnProperty('code')) {
 			this.$router.push('/');
 		}
 	},
@@ -55,9 +55,9 @@ export default {
 			const response = (await this.$axios.post('/auth/password/reset', {
 				new_password: this.new_password,
 				confirm_password: this.confirm_password,
-				reset_code: this.$route.query.hash
+				reset_code: this.$route.query.code
 			})).data;
-			if (response.status === 'success') {
+			if (response.code === 200) {
 				this.$toast.success(response.message);
 				this.$router.push('/');
 			} else {
