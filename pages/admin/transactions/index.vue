@@ -36,8 +36,8 @@
 									<td class="transaction-info-block__item-value" v-else>
 										<img :src="'/icons/' + transaction.coin_from.symbol + '.png'" :alt="transaction.coinTo.symbol" class="transaction-info-block__item-value-icon"> {{ transaction.coin_from.name }}
 									</td>
-									<td v-if="transaction.type === 'buy'">{{ transaction.amountFrom }}</td>
-									<td v-else>{{ transaction.amountTo }}</td>
+									<td v-if="transaction.type === 'buy'">{{ transaction.amountTo }}</td>
+									<td v-else>{{ transaction.amountFrom }}</td>
 									<td class="transaction-info-block__item-value" v-if="transaction.type === 'buy'">
 										<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> {{ +(transaction.amountFrom).toFixed(2) }}
 									</td>

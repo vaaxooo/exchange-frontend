@@ -27,31 +27,43 @@
 								<thead>
 									<tr>
 										<th scope="col">Криптовалюта</th>
+										<th scope="col">Тип</th>
 										<th scope="col">Количество</th>
 										<th scope="col">Цена</th>
+										<th scope="col">Статус</th>
 										<th scope="col">Дата</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td class="transaction-info-block__item-value">
-											<img src="/icons/btc.png" alt="btc" class="transaction-info-block__item-value-icon"> Bitcoin
+								<tbody v-if="Object.keys(transactions).length > 0">
+									<tr v-for="transaction in transactions" :key="transaction.id">
+										<td class="transaction-info-block__item-value" v-if="transaction.type === 'buy'">
+											<img :src="'/icons/' + transaction.coin_to.symbol + '.png'" :alt="transaction.coin_from.symbol" class="transaction-info-block__item-value-icon"> {{ transaction.coin_to.name }}
 										</td>
-										<td>0.0001</td>
-										<td class="transaction-info-block__item-value">
-											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> 100
+										<td class="transaction-info-block__item-value" v-else>
+											<img :src="'/icons/' + transaction.coin_from.symbol + '.png'" :alt="transaction.coin_to.symbol" class="transaction-info-block__item-value-icon"> {{ transaction.coin_from.name }}
 										</td>
-										<td>2022-12-08 00:00:00</td>
-									</tr>
-									<tr>
-										<td class="transaction-info-block__item-value">
-											<img src="/icons/eth.png" alt="eth" class="transaction-info-block__item-value-icon"> Ethereum
+
+										<td class="text-success fw-bold" v-if="transaction.type === 'buy'">Покупка</td>
+										<td class="text-danger fw-bold" v-else>Продажа</td>
+
+										<td v-if="transaction.type === 'buy'">{{ transaction.amountTo }}</td>
+										<td v-else>{{ transaction.amountFrom }}</td>
+
+										<td class="transaction-info-block__item-value" v-if="transaction.type === 'buy'">
+											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> {{ +(transaction.amountFrom).toFixed(2) }}
 										</td>
-										<td>1.0132</td>
-										<td class="transaction-info-block__item-value">
-											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> 100
+										<td class="transaction-info-block__item-value" v-else>
+											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> {{ +(transaction.amountTo).toFixed(2) }}
 										</td>
-										<td>2022-12-08 00:00:00</td>
+
+										<td class="text-success fw-bold" v-if="transaction.status === 'success'">Успешно</td>
+										<td class="text-danger fw-bold" v-if="transaction.status === 'failed'">Заблокировано</td>
+										<td class="text-warning fw-bold" v-if="transaction.status === 'pending'">Ожидание оплаты</td>
+										<td class="text-secondary fw-bold" v-if="transaction.status === 'processing'">В обработке</td>
+										<td class="text-danger fw-bold" v-if="transaction.status === 'unpaid'">Неоплачено</td>
+										<td class="text-success fw-bold" v-if="transaction.status === 'paid'">Успешно</td>
+
+										<td>{{ formatDate(transaction.created_at) }}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -66,21 +78,32 @@
 </template>
 
 <script>
+import formatDate from '@/plugins/formatDate'
+
 export default {
   	name: 'IndexPage',
   	auth: true,
 	data() {
 		return {
-			wallets: []
+			wallets: [],
+			transactions: [],
+
+			formatDate
 		}
 	},
 	async fetch() {
 		await this.getWallets()
+		await this.getTransactions()
 	},
 	methods: {
 		async getWallets() {
-			const response = await this.$axios.$get('/wallets')
+			const response = (await this.$axios.get('/wallets')).data
 			this.wallets = response.data.data
+		},
+
+		async getTransactions() {
+			const response = (await this.$axios.get('/transactions')).data
+			this.transactions = response.data
 		}
 	}
 }
