@@ -554,3 +554,7 @@ img.site-logo {
     right: 50px;
     font-weight: 600;
 }
+
+.vertical-align-item {
+    margin-top: 30px!important;
+}

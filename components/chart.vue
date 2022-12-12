@@ -119,6 +119,16 @@ export default {
 
 			/* ######################### */
 
+			const res2 = (await this.$axios.get('https://www.kucoin.com/_api/order-book/candles?symbol=' + this.first_coin + '-USDT&type=8hour&begin=1627200000&end=1641600000')).data
+
+			if(res2.data[0][4] == undefined) {
+				this.rates.bittrex = 0
+			} else {
+				this.rates.bittrex = (+res2.data[0][4]).toFixed(2)
+			}
+
+			/* ######################### */
+
 			const res3 = await fetch('https://www.bitstamp.net/api/v2/ticker/' + this.currentCoin + '/');
 			const data3 = await res3.json();
 

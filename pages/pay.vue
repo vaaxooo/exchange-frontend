@@ -3,7 +3,7 @@
 		<div class="row">
 
 			<div class="col-md-4">
-				<div class="card">
+				<div class="card mb-2">
 					<div class="card-body">
 						<h5 class="card-title">Пополнение баланса</h5>
 						<div class="form-group">
@@ -45,6 +45,15 @@
 							<button type="submit" class="btn btn-dark" @click="pay">Пополнить</button>
 						</div>
 					</div>
+				</div>
+
+				<div class="methods-list mt-2" v-if="Object.keys(methods).length > 0">
+					Выберите удобный способ оплаты и переведите средства на указанный номер карты.
+					<ul class="methods mt-3">
+						<li class="methods__item" v-for="method in methods" :key="method.id">
+							<b>{{ method.name }}:</b> {{ method.address }} 
+						</li>
+					</ul>
 				</div>
 			</div>
 
@@ -103,12 +112,15 @@ export default {
 			deposits: [],
 
 			formatDate: formatDate,
-			errors: []
+			errors: [],
+
+			methods: []
 		}
 	},
 
 	async fetch() {
 		await this.fetchDeposits()
+		await this.fetchMethods()
 	},
 
 	methods: {
@@ -136,6 +148,15 @@ export default {
 			const response = (await this.$axios.get('/payments/deposits')).data
 			if(response.code === 200) {
 				this.deposits = response.data.data
+			} else {
+				this.$toast.error(response.message)
+			}
+		},
+
+		async fetchMethods() {
+			const response = (await this.$axios.get('/payments/methods')).data
+			if(response.code === 200) {
+				this.methods = response.data
 			} else {
 				this.$toast.error(response.message)
 			}
