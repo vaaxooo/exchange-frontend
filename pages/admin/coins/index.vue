@@ -40,7 +40,7 @@
 										<a :href="'/admin/coins/' + coin.id" class="btn btn-light btn-sm btn-icon">
 											<span class="material-icons">edit</span>
 										</a>
-										<a href="#" class="btn btn-danger btn-sm btn-icon" @click="deleteCoin(coin.id)">
+										<a href="#" class="btn btn-danger btn-sm btn-icon" @click="deleteCoin(coin.id)" v-if="coin.symbol !== 'usdt'">
 											<span class="material-icons">delete</span>
 										</a>
 									</td>
