@@ -27,36 +27,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row">1</th>
+								<tr v-for="coin in coins" :key="coin.id">
+									<th scope="row">{{ coin.id }}</th>
 									<td class="transaction-info-block__item-value">
-										<img src="/icons/btc.png" alt="btc" class="transaction-info-block__item-value-icon"> Bitcoin
+										<img :src="'/icons/' + (coin.symbol).toLowerCase() + '.png'" alt="btc" class="transaction-info-block__item-value-icon"> {{ coin.name }}
 									</td>
-									<td>BTC</td>
-									<td>1,0031524</td>
-									<td class="text-success fw-bold">Активный</td>
+									<td>{{ coin.symbol }}</td>
+									<td>{{ coin.reserve }}</td>
+									<td class="text-success fw-bold" v-if="coin.is_active">Активный</td>
+									<td class="text-danger fw-bold" v-else>Не активный</td>
 									<td>
-										<a href="/admin/coins/3" class="btn btn-light btn-sm btn-icon">
+										<a :href="'/admin/coins/' + coin.id" class="btn btn-light btn-sm btn-icon">
 											<span class="material-icons">edit</span>
 										</a>
-										<a href="#" class="btn btn-danger btn-sm btn-icon">
-											<span class="material-icons">delete</span>
-										</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">1</th>
-									<td class="transaction-info-block__item-value">
-										<img src="/icons/eth.png" alt="eth" class="transaction-info-block__item-value-icon"> Ethereum
-									</td>
-									<td>ETH</td>
-									<td>31,0031524</td>
-									<td class="text-success fw-bold">Активный</td>
-									<td>
-										<a href="/admin/coins/3" class="btn btn-light btn-sm btn-icon">
-											<span class="material-icons">edit</span>
-										</a>
-										<a href="#" class="btn btn-danger btn-sm btn-icon">
+										<a href="#" class="btn btn-danger btn-sm btn-icon" @click="deleteCoin(coin.id)">
 											<span class="material-icons">delete</span>
 										</a>
 									</td>
@@ -72,6 +56,31 @@
 </template>
 <script>
 export default {
-	layout: "admin"
+	layout: "admin",
+	auth: true,
+	data() {
+		return {
+			coins: [],
+		};
+	},
+	async fetch() {
+		await this.fetchCoins();
+	},
+	methods: {
+		async fetchCoins() {
+			const response = (await this.$axios.get("/admin/coins")).data;
+			this.coins = response.data.data;
+		},
+
+		async deleteCoin(coin_id) {
+			const response = (await this.$axios.delete("/admin/coins/" + coin_id)).data;
+			if (response.code === 200) {
+				this.$toast.success(response.message);
+				this.coins = this.coins.filter(coin => coin.id !== coin_id);
+			} else {
+				this.$toast.error(response.message);
+			}
+		}
+	},
 }
 </script>

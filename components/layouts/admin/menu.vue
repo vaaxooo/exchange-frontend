@@ -49,6 +49,12 @@
 					</a>
 				</li>
 
+				<li class="nav-item">
+					<a class="nav-link" href="/admin/contacts/">
+						<span class="material-symbols-outlined">description</span> Контакты
+					</a>
+				</li>
+
 			</ul>
 			<hr>
 			<div class="d-none d-lg-block w-100">

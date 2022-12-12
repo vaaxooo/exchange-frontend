@@ -23,35 +23,25 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>test@example.com</td>
-									<td class="text-success fw-bold">Пополнение</td>
+								<tr v-for="deposit in deposits" :key="deposit.id">
+									<th scope="row">{{ deposit.id }}</th>
+									<td>{{ deposit.user.email }}</td>
+									<td class="text-success fw-bold" v-if="deposit.type === 'deposit'">Пополнение</td>
+									<td class="text-danger fw-bold" v-if="deposit.type === 'withdrawal'">Вывод</td>
 									<td class="transaction-info-block__item-value">
-										<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> 100
+										<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> {{ deposit.amount }}
 									</td>
-									<td class="text-success fw-bold">Зачислено</td>
-									<td>2021-01-01 00:00:00</td>
+
+									<td class="text-success fw-bold" v-if="deposit.status === 'success'">Успешно</td>
+									<td class="text-danger fw-bold" v-if="deposit.status === 'failed'">Заблокировано</td>
+									<td class="text-warning fw-bold" v-if="deposit.status === 'pending'">Ожидание оплаты</td>
+									<td class="text-secondary fw-bold" v-if="deposit.status === 'processing'">В обработке</td>
+									<td class="text-danger fw-bold" v-if="deposit.status === 'unpaid'">Неоплачено</td>
+									<td class="text-success fw-bold" v-if="deposit.status === 'paid'">Успешно</td>
+							
+									<td>{{ formatDate(deposit.created_at) }}</td>
 									<td>
-										<a href="/admin/withdrawals/3" class="btn btn-light btn-sm btn-icon">
-											<span class="material-icons">edit</span>
-										</a>
-										<a href="#" class="btn btn-danger btn-sm btn-icon">
-											<span class="material-icons">delete</span>
-										</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>test2@example.com</td>
-									<td class="text-danger fw-bold">Вывод</td>
-									<td class="transaction-info-block__item-value">
-										<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> 100
-									</td>
-									<td class="text-danger fw-bold">Отказано</td>
-									<td>2021-01-01 00:00:00</td>
-									<td>
-										<a href="/admin/withdrawals/3" class="btn btn-light btn-sm btn-icon">
+										<a :href="'/admin/withdrawals/' + deposit.id" class="btn btn-light btn-sm btn-icon">
 											<span class="material-icons">edit</span>
 										</a>
 										<a href="#" class="btn btn-danger btn-sm btn-icon">
@@ -69,9 +59,26 @@
 	</div>
 </template>
 <script>
+import formatDate from "~/plugins/formatDate";
 
 export default {
-	layout: "admin"
+	layout: "admin",
+	data() {
+		return {
+			deposits: [],
+			formatDate
+		};
+	},
+	async fetch() {
+		await this.fetchDeposits();
+	},
+
+	methods: {
+		async fetchDeposits() {
+			const response = (await this.$axios.get("/admin/payments")).data;
+			this.deposits = response.data.data;
+		}
+	}
 }
 
 </script>

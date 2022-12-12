@@ -2,16 +2,17 @@
 
 	<div class="content mt-3">
 		<div class="row">
-			<div class="text-right p-2">
+			<div class="text-right p-2" v-if="Object.keys(wallets).length >= 6">
 				<a href="#" class="text-link text-decoration-none text-muted">Посмотреть все</a>
 			</div>
-			<div class="coins-list row px-0 mx-0 mb-3">
-				<my-coins />
+
+			<div class="coins-list row px-0 mx-0 mb-3" v-if="wallets">
+				<my-coins v-for="wallet in wallets" :key="wallet.id" :wallet="wallet" />
 			</div>
 
 
 			<div class="col-md-4">
-				<exchange-block />
+				<exchange-block :wallets="wallets" />
 			</div>
 
 
@@ -67,6 +68,20 @@
 <script>
 export default {
   	name: 'IndexPage',
-  	auth: true
+  	auth: true,
+	data() {
+		return {
+			wallets: []
+		}
+	},
+	async fetch() {
+		await this.getWallets()
+	},
+	methods: {
+		async getWallets() {
+			const response = await this.$axios.$get('/wallets')
+			this.wallets = response.data.data
+		}
+	}
 }
 </script>

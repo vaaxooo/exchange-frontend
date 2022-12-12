@@ -4,7 +4,7 @@ export default {
 
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
-        title: 'FRONTEND',
+        title: 'Exchange currency group',
         htmlAttrs: {
             lang: 'en'
         },

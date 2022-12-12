@@ -1,8 +1,8 @@
 <template>
-	<div class="card mt-1">
+	<div class="card mt-1" v-if="currentCoin">
 		<div class="card-body p-3">
 
-			<div class="pair-switcher">BTC / USDT</div>
+			<div class="pair-switcher">{{ currentCoin }}</div>
 
 			<div class="trading_terminal" id="trading_terminal"></div>
 
@@ -17,29 +17,43 @@ export default {
 		return {
 			chart: null,
 			lineSeries: null,
-			atrs: []
+			atrs: [],
+			currentCoin: 'BTCUSDT'
 		}
+	},
+	created() {
+		this.$nuxt.$off('changeCoin')
+		this.$nuxt.$on('changeCoin', (coin) => {
+			this.currentCoin = coin.toUpperCase() + 'USDT'
+			this.getChart()
+		})
 	},
 	mounted() {
 
 	},
 	async fetch() {
-		const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=10000');
-		const data = await res.json();
-
-		for(let i = 0; i < data.length; i++) {
-			let item = {};
-			item.time = data[i][0] / 1000;
-			item.open = data[i][1];
-			item.high = data[i][2];
-			item.low = data[i][3];
-			item.close = data[i][4];
-			this.atrs.push(item);
-		}
-		this.updateChart();
+		await this.getChart()
 	},
 	methods: {
+
+		async getChart() {
+			const res = await fetch('https://api.binance.com/api/v3/klines?symbol=' + this.currentCoin + '&interval=1d&limit=10000');
+			const data = await res.json();
+
+			for(let i = 0; i < data.length; i++) {
+				let item = {};
+				item.time = data[i][0] / 1000;
+				item.open = data[i][1];
+				item.high = data[i][2];
+				item.low = data[i][3];
+				item.close = data[i][4];
+				this.atrs.push(item);
+			}
+			this.updateChart();
+		},
+
 		updateChart() {
+			document.querySelector('#trading_terminal').innerHTML = ''
 			const chart = createChart(document.querySelector('#trading_terminal'), { 
 				height: 384, 
 			    timeScale: {

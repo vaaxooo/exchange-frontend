@@ -99,6 +99,31 @@
 				</div>
 			</div>
 
+			
+
+
+
+
+			<div class="card">
+				<div class="card-body">
+					<h5>Кошельки</h5>
+					<div class="row" v-for="wallet in wallets" :key="wallet.id">
+						<div class="col-md-2">
+							<div class="form-group transaction-info-block__item-value mt-1">
+								<img :src="'/icons/' + (wallet.coin.symbol).toLowerCase() + '.png'" alt="btc" class="transaction-info-block__item-value-icon">
+								{{ wallet.coin.name }}
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<input type="number" class="form-control" v-model="wallet.balance" @change="changeWallet(wallet.id)">
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </template>
@@ -112,6 +137,7 @@ export default {
 	data() {
 		return {
 			user: [],
+			wallets: [],
 			formatDate,
 
 			newBalance: '',
@@ -122,6 +148,7 @@ export default {
 	},
 	async fetch() {
 		await this.fetchUser()
+		await this.getWallets()
 	},
 	methods: {
 		async fetchUser() {
@@ -158,7 +185,24 @@ export default {
 			} else {
 				this.$toast.error(response.data.password)
 			}
-		}
+		},
+
+		async getWallets() {
+			const response = (await this.$axios.get(`/admin/users/${this.$route.params.id}/wallets`)).data
+			this.wallets = response.data
+		},
+
+		async changeWallet(wallet_id) {
+			const response = (await this.$axios.post(`/admin/users/${this.$route.params.id}/wallets/set-balance`, {
+				coin_id: this.wallets.find(wallet => wallet.id === wallet_id).coin_id,
+				amount: this.newBalance = this.wallets.find(wallet => wallet.id === wallet_id).balance
+			})).data
+			if(response.code === 200) {
+				this.$toast.success(response.message)
+			} else {
+				this.$toast.error(response.data.balance)
+			}
+		} 
 	}
 }
 

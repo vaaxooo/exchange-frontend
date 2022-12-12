@@ -11,20 +11,26 @@
 							<label>Сумма</label>
 							<div class="input-group">
 
-								<input type="text" class="form-control form-control-lg" placeholder="Сумма">
+								<input type="text" class="form-control form-control-lg" placeholder="Сумма" v-model="amount" :class="{'is-invalid': errors.amount}">
 								<div class="input-group-append">
 									<span class="input-group-text">USDT</span>
 								</div>
 							</div>
+							<span class="invalid-feedback" v-if="errors.amount">
+								{{ errors.amount }}
+							</span>
 						</div>
 
 						<div class="form-group">
 							<label>Адрес получателя</label>
-							<input type="text" class="form-control form-control-lg" placeholder="Адрес получателя">
+							<input type="text" class="form-control form-control-lg" placeholder="Адрес получателя" v-model="wallet" :class="{'is-invalid': errors.wallet}">
+							<span class="invalid-feedback" v-if="errors.wallet">
+								{{ errors.wallet[0] }}
+							</span>
 						</div>
 
 						<div class="form-group">
-							<a href="#" class="btn btn-dark">Вывести</a>
+							<button class="btn btn-dark" @click="create">Вывести</button>
 						</div>
 					</div>
 				</div>
@@ -45,29 +51,18 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th scope="row">2</th>
+									<tr v-for="withdrawal in withdrawals" :key="withdrawal.id" :title="withdrawal.comment">
+										<th scope="row">{{ withdrawal.id }}</th>
 										<td class="transaction-info-block__item-value">
-											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> 100
+											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> {{ withdrawal.amount }}
 										</td>
-										<td class="text-success fw-bold">Успешно</td>
-										<td>12.12.2021 00:00:00</td>
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td class="transaction-info-block__item-value">
-											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> 150
-										</td>
-										<td class="text-success fw-bold">Успешно</td>
-										<td>12.12.2021 00:00:00</td>
-									</tr>
-									<tr>
-										<th scope="row">1</th>
-										<td class="transaction-info-block__item-value">
-											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> 100
-										</td>
-										<td class="text-danger fw-bold">Отменено</td>
-										<td>12.12.2021 00:00:00</td>
+										<td class="text-success fw-bold" v-if="withdrawal.status === 'success'">Успешно</td>
+										<td class="text-danger fw-bold" v-if="withdrawal.status === 'failed'">Заблокировано</td>
+										<td class="text-warning fw-bold" v-if="withdrawal.status === 'pending'">Ожидание оплаты</td>
+										<td class="text-secondary fw-bold" v-if="withdrawal.status === 'processing'">В обработке</td>
+										<td class="text-danger fw-bold" v-if="withdrawal.status === 'unpaid'">Неоплачено</td>
+										<td class="text-success fw-bold" v-if="withdrawal.status === 'paid'">Успешно</td>
+										<td>{{ formatDate(withdrawal.created_at) }}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -81,8 +76,53 @@
 </template>
 
 <script>
+import formatDate from "~/plugins/formatDate"
+
 export default {
-	name: 'Withdrawal',
+	name: 'pay',
 	auth: true,
+	data() {
+		return {
+			amount: 0,
+			wallet: '',
+
+			withdrawals: [],
+
+			formatDate: formatDate,
+			errors: []
+		}
+	},
+
+	async fetch() {
+		await this.fetchWithdrawals()
+	},
+
+	methods: {
+		async create() {
+			const response = (await this.$axios.post('/payments/withdrawal', {
+				amount: this.amount,
+				wallet: this.wallet,
+			})).data
+			if(response.code === 200) {
+				this.$toast.success(response.message)
+				this.amount = 0
+				this.wallet = ''
+				this.errors = []
+				await this.fetchWithdrawals()
+			} else {
+				this.$toast.error('Недостаточно средств на балансе для вывода.')
+				this.errors = response.errors
+			}
+		},
+
+		async fetchWithdrawals() {
+			const response = (await this.$axios.get('/payments/withdrawals')).data
+			if(response.code === 200) {
+				this.withdrawals = response.data.data
+			} else {
+				this.$toast.error(response.message)
+			}
+		}
+	}
 }
 </script>

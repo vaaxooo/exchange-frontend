@@ -11,8 +11,10 @@
 					<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 ">
 						<li><a href="/" class="nav-link px-2 text-dark">Главная</a></li>
 						<li><a href="#" class="nav-link px-2 text-dark">О нас</a></li>
-						<li><a href="#" class="nav-link px-2 text-dark">Telegram</a></li>
-						<li><a href="#" class="nav-link px-2 text-dark">WhatsApp</a></li>
+
+						<li v-for="contact in contacts" :key="contact.id">
+							<a :href="contact.link" class="nav-link px-2 text-dark">{{ contact.name }}</a>
+						</li>
 					</ul>
 
 					<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -55,10 +57,23 @@
 
 <script>
 export default {
+	data() {
+		return {
+			contacts: []
+		}
+	},
+	async fetch() {
+		await this.fetchContacts()
+	},
 	methods: {
+		async fetchContacts() {
+			const response = (await this.$axios.get('/get-contacts')).data
+			this.contacts = response.data
+		},
+
 		logout() {
 			this.$auth.logout()
 		}
-	}
+	},
 }
 </script>
