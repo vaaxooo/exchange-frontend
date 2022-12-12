@@ -182,7 +182,6 @@ export default {
 			},
 
 			coins: [],
-			wallets: [],
 
 			exchange_rate: 0
 		}
