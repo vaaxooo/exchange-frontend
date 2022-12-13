@@ -17,8 +17,8 @@ export default {
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
             { rel: 'stylesheet', type: 'text/css', href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css' },
-            { rel: 'stylesheet', type: 'text/css', href: '/theme.css' },
-            { rel: 'stylesheet', type: 'text/css', href: '/style.css' },
+            { rel: 'stylesheet', type: 'text/css', href: '/theme2.css' },
+            { rel: 'stylesheet', type: 'text/css', href: '/style2.css' },
             { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' },
             { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap' },
             { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' },

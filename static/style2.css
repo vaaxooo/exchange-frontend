@@ -1,0 +1,601 @@
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background: #f0f0f0;
+}
+
+span.material-symbols-outlined {
+    vertical-align: bottom;
+    margin-right: 10px;
+}
+
+.header-content {
+    margin-bottom: 20px;
+    margin-top: 7%;
+}
+
+@media (min-width: 1200px) {
+    .container,
+    .container-sm,
+    .container-md,
+    .container-lg,
+    .container-xl {
+        max-width: 1340px;
+    }
+    .card-body {
+        padding: 40px;
+    }
+}
+
+.btn-icon {
+    padding: 5px 8px;
+    font-size: 0px;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+}
+
+.card {
+    box-shadow: 0 0 0 0 transparent;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px -3px rgb(0 0 0 / 50%);
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ffffff;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid #ffffff;
+}
+
+.table>:not(caption)>*>* {
+    padding: 0.5rem 0.5rem;
+    background-color: var(--bs-table-bg);
+    border-bottom: 0.5px solid #f8f9fa;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+
+.transaction-info-block__item {
+    margin: 10px 0;
+}
+
+.transaction-info-block__item-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.transaction-info-block__item-value {
+    font-size: 16px;
+}
+
+span.badge.badge-secondary.setstatus {
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 1px 0;
+}
+
+.setstatus.pending {
+    background-color: #ffc107;
+    color: #ffffff;
+}
+
+.setstatus.paid {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.setstatus.unpaid {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.setstatus.failed {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.setstatus.paid {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+.setstatus:hover {
+    opacity: 0.8;
+}
+
+img.transaction-info-block__item-value-icon {
+    width: 24px;
+    vertical-align: bottom;
+    margin-right: 5px;
+}
+
+.vertical-with-input {
+    margin-top: 29px!important;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+header.p-3.text-bg-white {
+    background: #fff;
+}
+
+ul.nav.nav-tabs {
+    background: transparent;
+}
+
+.exchange-block {
+    background: #fff;
+    border-radius: 4px;
+    padding: 40px;
+    box-shadow: 0px 0px 5px -3px rgb(0 0 0 / 50%);
+}
+
+a.nav-link.exchange-switcher.active {
+    background: #343a40;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    padding: 7px 20px;
+}
+
+a.nav-link.exchange-switcher {
+    background: #f8f9fa;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    padding: 7px 20px;
+}
+
+.exchange-info {
+    background: #fff;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.exchange-info-item {
+    margin-bottom: 20px;
+}
+
+.exchange-info-item-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.exchange-info-item-value {
+    font-size: 16px;
+}
+
+iframe#tradingview_00bdb {
+    min-height: 400px!important;
+}
+
+.pair-switcher {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.title {
+    font-size: 22px;
+    margin: 20px 0;
+}
+
+.my-coin {
+    background: #fff;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0px 0px 5px -3px rgb(0 0 0 / 50%);
+}
+
+.my-coin-name {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.coin-balance {
+    font-size: 14px;
+    font-weight: 400;
+    display: block;
+}
+
+.coin-desc {
+    display: inline-block;
+}
+
+img {
+    margin-right: 10px;
+}
+
+.menu {
+    background: #fafafa;
+    padding: 3px 25px;
+    box-shadow: 0px 0px 5px -3px rgb(0 0 0 / 50%);
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: #007bff;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.login-form {
+    background: #fff;
+    border-radius: 4px;
+    padding: 40px;
+    box-shadow: 0px 0px 5px -3px rgb(0 0 0 / 50%);
+}
+
+.login-block__title {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.login-block__form__item {
+    margin-bottom: 20px;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #ffffff;
+    text-align: left;
+    background: #111a3b;
+}
+
+span.material-symbols-outlined {
+    vertical-align: bottom;
+    margin-right: 10px;
+}
+
+.header-content {
+    margin-bottom: 20px;
+    margin-top: 7%;
+}
+
+@media (min-width: 1200px) {
+    .container,
+    .container-sm,
+    .container-md,
+    .container-lg,
+    .container-xl {
+        max-width: 1340px;
+    }
+    .card-body {
+        padding: 40px;
+    }
+}
+
+.btn-icon {
+    padding: 5px 8px;
+    font-size: 0px;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+}
+
+.card {
+    background: #2d3853;
+    color: #fff;
+    box-shadow: 0 0 0 0 transparent;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px -3px rgb(0 0 0 / 50%);
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #2d3853;
+    color: #fff;
+    border-top: 0;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid #ffffff;
+}
+
+.table>:not(caption)>*>* {
+    border: 0;
+    color: #fff;
+    padding: 0.5rem 0.5rem;
+    background-color: var(--bs-table-bg);
+    border-bottom: 0.5px solid #2d3853;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+
+.transaction-info-block__item {
+    margin: 10px 0;
+}
+
+.transaction-info-block__item-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.transaction-info-block__item-value {
+    font-size: 16px;
+}
+
+span.badge.badge-secondary.setstatus {
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 1px 0;
+}
+
+.setstatus.pending {
+    background-color: #ffc107;
+    color: #ffffff;
+}
+
+.setstatus.paid {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.setstatus.unpaid {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.setstatus.failed {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.setstatus.paid {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+.setstatus:hover {
+    opacity: 0.8;
+}
+
+img.transaction-info-block__item-value-icon {
+    width: 24px;
+    vertical-align: bottom;
+    margin-right: 5px;
+}
+
+.vertical-with-input {
+    margin-top: 29px!important;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #fff;
+}
+
+header.p-3.text-bg-white {
+    background: #111a3b;
+    border-bottom: 2px solid #2d3853;
+}
+
+ul.nav.nav-tabs {
+    background: transparent;
+}
+
+.exchange-block {
+    background: #2d3853;
+    border-radius: 4px;
+    padding: 40px;
+    box-shadow: 0px 0px 5px -3px rgb(0 0 0 / 50%);
+    color: #fff;
+}
+
+a.nav-link.exchange-switcher.active {
+    background: #788de7;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    padding: 7px 20px;
+}
+
+a.nav-link.exchange-switcher {
+    background: #2d3853;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    padding: 7px 20px;
+}
+
+.exchange-info {
+    background: #2d3853;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.exchange-info-item {
+    margin-bottom: 20px;
+}
+
+.exchange-info-item-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.exchange-info-item-value {
+    font-size: 16px;
+}
+
+iframe#tradingview_00bdb {
+    min-height: 400px!important;
+}
+
+.pair-switcher {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.title {
+    font-size: 22px;
+    margin: 20px 0;
+}
+
+.my-coin {
+    background: #2d3853;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0px 0px 5px -3px rgb(0 0 0 / 50%);
+    color: #fff;
+}
+
+.my-coin-name {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.coin-balance {
+    font-size: 14px;
+    font-weight: 400;
+    display: block;
+}
+
+.coin-desc {
+    display: inline-block;
+}
+
+img {
+    margin-right: 10px;
+}
+
+.menu {
+    background: #111a3b;
+    padding: 3px 25px;
+    box-shadow: 0px 0px 5px -3px rgb(0 0 0 / 50%);
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: #007bff;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.login-form {
+    background: #fff;
+    border-radius: 4px;
+    padding: 40px;
+    box-shadow: 0px 0px 5px -3px rgb(0 0 0 / 50%);
+}
+
+.login-block__title {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.login-block__form__item {
+    margin-bottom: 20px;
+}
+
+.login-block {
+    width: 500px;
+    background: #fff;
+    padding: 40px;
+    margin-top: 5%;
+}
+
+ul.links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+ul.links>li {
+    margin-right: 30px;
+}
+
+.footer {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+a {
+    display: inline-flex;
+    list-style: none;
+}
+
+li.site {
+    list-style: none;
+    margin: 10px 0;
+}
+
+ul.trande-sites {
+    padding: 0;
+}
+
+img.site-logo {
+    width: 32px;
+    margin-right: 15px;
+}
+
+.site-name {
+    margin: auto;
+    font-size: 20px;
+    color: #Fff;
+}
+
+.site-rate {
+    margin: auto;
+    font-size: 18px;
+    color: #fff;
+    position: absolute;
+    right: 50px;
+    font-weight: 600;
+}
+
+.vertical-align-item {
+    margin-top: 30px!important;
+}
+
+.table-hover>tbody>tr:hover>* {
+    --bs-table-accent-bg: var(--bs-table-hover-bg);
+    color: #ffffff;
+}
+
+input::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #fff!important;
+    opacity: 1;
+    /* Firefox */
+}
+
+input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #fff!important;
+}
+
+input::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #fff!important;
+}
+
+a.nav-link {
+    color: #fff;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+    color: rgb(120 141 231);
+}

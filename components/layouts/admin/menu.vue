@@ -2,7 +2,7 @@
 	<div class="navbar navbar-expand-lg bg-white navbar-white sticky-top">
 
 		<a class="navbar-brand" href="#">
-			<img alt="Pipeline" src="/img/logo.svg">
+			<img alt="Pipeline" src="/logo.jpg" width="62px">
 		</a>
 		<div class="d-flex align-items-center">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
