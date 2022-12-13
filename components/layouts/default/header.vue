@@ -33,7 +33,7 @@
 			</div>
 		</header>
 
-		<div class="menu">
+		<div class="menu" v-if="$auth.user">
 			<ul class="nav nav-tabs container">
 				<li class="nav-item">
 					<a class="nav-link active" href="/">Маркет</a>
