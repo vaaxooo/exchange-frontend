@@ -33,6 +33,13 @@
 
 						<div class="col-md-4">
 							<div class="transaction-info-block__item">
+								<div class="transaction-info-block__item-title">Номер телефона</div>
+								<div class="transaction-info-block__item-value">{{ user.phone }}</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="transaction-info-block__item">
 								<div class="transaction-info-block__item-title">Дата регистрации</div>
 								<div class="transaction-info-block__item-value">{{ formatDate(user.created_at) }}</div>
 							</div>

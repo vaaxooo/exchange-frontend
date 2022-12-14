@@ -41,7 +41,7 @@
 
 export default {
   	name: 'IndexPage',
-  	auth: true,
+  	auth: false,
 	data() {
 		return {
 			coins: [],

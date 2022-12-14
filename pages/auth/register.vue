@@ -20,6 +20,11 @@
 							<span class="text-danger" v-if="errors.email">{{ errors.email[0] }}</span>
 						</div>
 						<div class="login-block__form__item">
+							<label>Номер телефона</label>
+							<input type="text" class="form-control" name="login" placeholder="Почта" v-model="phone" :class="{'is-invalid': errors.phone}">
+							<span class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</span>
+						</div>
+						<div class="login-block__form__item">
 							<label>Пароль</label>
 							<input type="password" class="form-control" name="password" placeholder="Пароль" v-model="password" :class="{'is-invalid': errors.password}">
 							<span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
