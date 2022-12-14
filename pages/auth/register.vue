@@ -83,7 +83,10 @@ export default {
 				this.fio = '';
 				this.password = '';
 				this.confirm_password = '';
-				this.$router.push('/auth/login');
+
+				await this.$auth.setUserToken(response.data.user.token);
+				await this.$auth.setUser(response.data.user);
+				this.$router.go('/');
 			} else {
 				this.errors = response.message;
 			}
