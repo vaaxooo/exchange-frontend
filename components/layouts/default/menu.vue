@@ -108,7 +108,7 @@ export default {
 
 		logout() {
 			this.$auth.logout()
-			this.$router.push('/auth/login')
+			this.$router.go('/auth/login')
 		}
 	}
 }
