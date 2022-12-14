@@ -599,3 +599,12 @@ a.nav-link {
 .nav-link:hover {
     color: rgb(120 141 231);
 }
+
+img.coin-market__img {
+    width: auto;
+    height: 32px;
+}
+
+td.coin-border {
+    border-bottom: 1px solid #596277!important;
+}

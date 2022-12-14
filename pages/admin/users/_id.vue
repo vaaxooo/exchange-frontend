@@ -115,13 +115,13 @@
 				<div class="card-body">
 					<h5>Кошельки</h5>
 					<div class="row" v-for="wallet in wallets" :key="wallet.id">
-						<div class="col-md-2">
+						<div class="col-md-2" v-if="wallet.coin.symbol !== 'usdt'">
 							<div class="form-group transaction-info-block__item-value mt-1">
 								<img :src="'/icons/' + (wallet.coin.symbol).toLowerCase() + '.png'" alt="btc" class="transaction-info-block__item-value-icon">
 								{{ wallet.coin.name }}
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-4" v-if="wallet.coin.symbol !== 'usdt'">
 							<div class="form-group">
 								<input type="number" class="form-control" v-model="wallet.balance" @change="changeWallet(wallet.id)">
 							</div>

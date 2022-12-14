@@ -2,79 +2,32 @@
 
 	<div class="content mt-3">
 		<div class="row">
-			<div class="text-right p-2" v-if="Object.keys(wallets).length >= 6">
-				<a href="#" class="text-link text-decoration-none text-muted">Посмотреть все</a>
-			</div>
 
-			<div class="coins-list row px-0 mx-0 mb-3" v-if="wallets">
-				<my-coins v-for="wallet in wallets" :key="wallet.id" :wallet="wallet" />
-			</div>
-
-
-			<div class="col-md-4">
-				<exchange-block :wallets="wallets" />
-			</div>
-
-			<div class="col-md-8">
-				<chart />
-			</div>
-
-
-			<div class="col-md-12">
-
-
-				<div class="title">Последние операции</div>
-				<div class="card mb-5">
-					<div class="card-body p-3">
-						<div class="table-responsive">
-							<table class="table table-hover">
-								<thead>
-									<tr>
-										<th scope="col">Криптовалюта</th>
-										<th scope="col">Тип</th>
-										<th scope="col">Количество</th>
-										<th scope="col">Цена</th>
-										<th scope="col">Комиссия</th>
-										<th scope="col">Статус</th>
-										<th scope="col">Дата</th>
-									</tr>
-								</thead>
-								<tbody v-if="Object.keys(transactions).length > 0">
-									<tr v-for="transaction in transactions" :key="transaction.id">
-										<td class="transaction-info-block__item-value" v-if="transaction.type === 'buy'">
-											<img :src="'/icons/' + transaction.coin_to.symbol + '.png'" :alt="transaction.coin_from.symbol" class="transaction-info-block__item-value-icon"> {{ transaction.coin_to.name }}
-										</td>
-										<td class="transaction-info-block__item-value" v-else>
-											<img :src="'/icons/' + transaction.coin_from.symbol + '.png'" :alt="transaction.coin_to.symbol" class="transaction-info-block__item-value-icon"> {{ transaction.coin_from.name }}
-										</td>
-
-										<td class="text-success fw-bold" v-if="transaction.type === 'buy'">Покупка</td>
-										<td class="text-danger fw-bold" v-else>Продажа</td>
-
-										<td v-if="transaction.type === 'buy'">{{ transaction.amountTo }}</td>
-										<td v-else>{{ transaction.amountFrom }}</td>
-
-										<td class="transaction-info-block__item-value" v-if="transaction.type === 'buy'">
-											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> {{ +(transaction.amountFrom).toFixed(2) }}
-										</td>
-										<td class="transaction-info-block__item-value" v-else>
-											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> {{ +(transaction.amountTo).toFixed(2) }}
-										</td>
-
-										<td>{{ transaction.commission }}</td>
-
-										<td class="text-success fw-bold" v-if="transaction.status === 'success'">Успешно</td>
-										<td class="text-danger fw-bold" v-if="transaction.status === 'failed'">Заблокировано</td>
-										<td class="text-warning fw-bold" v-if="transaction.status === 'pending'">Ожидание оплаты</td>
-										<td class="text-secondary fw-bold" v-if="transaction.status === 'processing'">В обработке</td>
-										<td class="text-danger fw-bold" v-if="transaction.status === 'unpaid'">Неоплачено</td>
-										<td class="text-success fw-bold" v-if="transaction.status === 'paid'">Успешно</td>
-
-										<td>{{ formatDate(transaction.created_at) }}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+			<div class="card">
+				<div class="card-body">
+					<div class="title">Криптовалюты</div>
+					<div class="table-resposible">
+						<table class="table table-responsible">
+							<thead>
+								<tr>
+									<th scope="col">Название</th>
+									<th scope="col">Атрибут</th>
+									<th scope="col">Курс</th>
+								</tr>
+							</thead>
+							<tbody class="table-striped">
+								<tr v-for="coin in coins" :key="coin.id">
+									<td class="coin-border">
+										<div class="coin-market">
+											<img :src="coin.image" alt="coin" class="coin-market__img">
+											{{ coin.name }}
+										</div>
+									</td>
+									<td class="coin-border">{{ coin.symbol }}</td>
+									<td class="coin-border">{{ coin.current_price }} $</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -85,33 +38,24 @@
 </template>
 
 <script>
-import formatDate from '@/plugins/formatDate'
 
 export default {
   	name: 'IndexPage',
   	auth: true,
 	data() {
 		return {
-			wallets: [],
-			transactions: [],
-
-			formatDate
+			coins: [],
 		}
 	},
 	async fetch() {
-		await this.getWallets()
-		await this.getTransactions()
+		await this.getCoins()
 	},
 	methods: {
-		async getWallets() {
-			const response = (await this.$axios.get('/wallets')).data
-			this.wallets = response.data.data
+		async getCoins() {
+			const response = (await this.$axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1')).data
+			this.coins = response
 		},
 
-		async getTransactions() {
-			const response = (await this.$axios.get('/transactions')).data
-			this.transactions = response.data
-		}
 	}
 }
 </script>

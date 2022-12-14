@@ -1,5 +1,5 @@
 <template>
-	<div class="col-md-2">
+	<div class="col-md-2" v-if="wallet.coin.symbol !== 'usdt'">
 		<div class="my-coin">
 			<div class="coin-name">
 				<img :src="'/icons/' + wallet.coin.symbol + '.png'" alt="coin" style="vertical-align: initial;">
