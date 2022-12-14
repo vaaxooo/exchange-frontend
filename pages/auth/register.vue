@@ -58,6 +58,7 @@ export default {
 			password: '',
 			confirm_password: '',
 			fio: '',
+			phone: '',
 			errors: [],
 			loading: false
 		}
@@ -78,6 +79,7 @@ export default {
 			const response = (await this.$axios.post('/auth/register', {
 				email: this.email,
 				fio: this.fio,
+				phone: this.phone,
 				password: this.password
 				})).data;
 
@@ -86,6 +88,7 @@ export default {
 				this.errors = {}
 				this.email = '';
 				this.fio = '';
+				this.phone = '';
 				this.password = '';
 				this.confirm_password = '';
 
