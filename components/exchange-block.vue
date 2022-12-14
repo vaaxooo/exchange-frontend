@@ -195,23 +195,31 @@ export default {
 		},
 
 		'buy.price'() {
-			this.buy.amount = this.buy.price * this.exchange_rate
-			this.calculate()
+			if(this.buy.price !== '') {
+				this.buy.amount = this.buy.price * this.exchange_rate
+				this.calculate()
+			}
 		},
 
 		'buy.amount'() {
-			this.buy.price = (this.buy.amount / this.exchange_rate)
-			this.calculate()
+			if(this.buy.amount !== '') {
+				this.buy.price = (this.buy.amount / this.exchange_rate)
+				this.calculate()
+			}
 		},
 
 		'sell.price'() {
-			this.sell.amount = this.sell.price * this.exchange_rate
-			this.calculate()
+			if(this.sell.price !== '') {
+				this.sell.amount = this.sell.price * this.exchange_rate
+				this.calculate()
+			}
 		},
 
 		'sell.amount'() {
-			this.sell.price = (this.sell.amount / this.exchange_rate)
-			this.calculate()
+			if(this.sell.amount !== '') {
+				this.sell.price = (this.sell.amount / this.exchange_rate)
+				this.calculate()
+			}
 		}
 	},
 	async fetch() {
@@ -221,6 +229,7 @@ export default {
 		async fetchCoins() {
 			const response = (await this.$axios.get('/coins')).data
 			this.coins = response.data
+			this.coins = this.coins.filter(coin => coin.symbol !== 'usdt')
 			this.buy.coin = this.coins[0].symbol
 		},
 
