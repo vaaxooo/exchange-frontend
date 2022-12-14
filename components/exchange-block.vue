@@ -231,6 +231,7 @@ export default {
 			this.coins = response.data
 			this.coins = this.coins.filter(coin => coin.symbol !== 'usdt')
 			this.buy.coin = this.coins[0].symbol
+			this.sell.coin = this.coins[0].symbol
 		},
 
 		exchange(type) {
