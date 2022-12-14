@@ -8,7 +8,7 @@
 
 			<ul class="trande-sites">
 				<li class="site">
-					<a href="#" target="_blank">
+					<a href="#">
 						<img src="https://bin.bnbstatic.com/static/images/common/favicon.ico" class="site-logo" alt="Binance">
 						<div class="site-name">
 							<span>Binance</span>
@@ -19,7 +19,7 @@
 					</a>
 				</li>
 				<li class="site">
-					<a href="#" target="_blank">
+					<a href="#">
 						<img src="https://www.kraken.com/favicon.ico" class="site-logo" alt="Kraken">
 						<div class="site-name">
 							<span>Kraken</span>
@@ -31,7 +31,7 @@
 				</li>
 
 				<li class="site">
-					<a href="#" target="_blank">
+					<a href="#">
 						<img src="https://cex.io/img/favicon/favicon.ico" class="site-logo" alt="CEX">
 						<div class="site-name">
 							<span>CEX</span>
