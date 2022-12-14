@@ -44,7 +44,7 @@
 								<div class="transaction-info-block__item">
 									<div class="transaction-info-block__item-title">Пользователь</div>
 									<div class="transaction-info-block__item-value">
-										<a :href="'/admin/users/' + transaction.user_id" class="transaction-info-block__item-value-link">{{ transaction.user.email }}</a>
+										<a :href="'/admin/users/' + transaction.user_id" class="transaction-info-block__item-value-link">{{ transaction.user.fio ?? transaction.user.email }}</a>
 									</div>
 								</div>
 							</div>

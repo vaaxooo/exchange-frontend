@@ -1,14 +1,13 @@
 <template>
-
-	<div>
-		<layouts-default-header />
-		<div class="container">
-			
-			<Nuxt />
-
-			<layouts-default-footer :links="links" />
+    <div class="layout layout-nav-side">
+		<layouts-default-menu />
+        <div class="main-container mt-5">
+            <div class="container">
+                <div class="row justify-content-center">
+					<Nuxt />
+				</div>
+			</div>
 		</div>
-
 	</div>
 </template>
 

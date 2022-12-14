@@ -10,6 +10,11 @@
 				<div class="login-block__form">
 					<div class="form">
 						<div class="login-block__form__item">
+							<label>ФИО</label>
+							<input type="text" class="form-control" name="fio" placeholder="ФИО" v-model="fio" :class="{'is-invalid': errors.fio}">
+							<span class="text-danger" v-if="errors.fio">{{ errors.fio[0] }}</span>
+						</div>
+						<div class="login-block__form__item">
 							<label>Почта</label>
 							<input type="text" class="form-control" name="login" placeholder="Почта" v-model="email" :class="{'is-invalid': errors.email}">
 							<span class="text-danger" v-if="errors.email">{{ errors.email[0] }}</span>
@@ -47,6 +52,7 @@ export default {
 			email: '',
 			password: '',
 			confirm_password: '',
+			fio: '',
 			errors: [],
 			loading: false
 		}
@@ -66,6 +72,7 @@ export default {
 			this.loading = true;
 			const response = (await this.$axios.post('/auth/register', {
 				email: this.email,
+				fio: this.fio,
 				password: this.password
 				})).data;
 
@@ -73,6 +80,7 @@ export default {
 				this.$toast.success(response.message);
 				this.errors = {}
 				this.email = '';
+				this.fio = '';
 				this.password = '';
 				this.confirm_password = '';
 				this.$router.push('/auth/login');

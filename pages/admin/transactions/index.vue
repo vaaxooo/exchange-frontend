@@ -27,7 +27,7 @@
 							<tbody>
 								<tr v-for="transaction in transactions" :key="transaction">
 									<th scope="row">{{ transaction.id }}</th>
-									<td>{{ transaction.user.email }}</td>
+									<td>{{ transaction.user.fio ?? transaction.user.email }}</td>
 									<td class="text-success fw-bold" v-if="transaction.type === 'buy'">Покупка</td>
 									<td class="text-danger fw-bold" v-else>Продажа</td>
 									<td class="transaction-info-block__item-value" v-if="transaction.type === 'buy'">

@@ -15,9 +15,13 @@
 				<exchange-block :wallets="wallets" />
 			</div>
 
-
 			<div class="col-md-8">
 				<chart />
+			</div>
+
+
+			<div class="col-md-12">
+
 
 				<div class="title">Последние операции</div>
 				<div class="card mb-5">
@@ -30,6 +34,7 @@
 										<th scope="col">Тип</th>
 										<th scope="col">Количество</th>
 										<th scope="col">Цена</th>
+										<th scope="col">Комиссия</th>
 										<th scope="col">Статус</th>
 										<th scope="col">Дата</th>
 									</tr>
@@ -55,6 +60,8 @@
 										<td class="transaction-info-block__item-value" v-else>
 											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> {{ +(transaction.amountTo).toFixed(2) }}
 										</td>
+
+										<td>{{ transaction.commission }}</td>
 
 										<td class="text-success fw-bold" v-if="transaction.status === 'success'">Успешно</td>
 										<td class="text-danger fw-bold" v-if="transaction.status === 'failed'">Заблокировано</td>

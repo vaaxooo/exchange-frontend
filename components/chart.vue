@@ -8,7 +8,7 @@
 
 			<ul class="trande-sites">
 				<li class="site">
-					<a href="https://www.binance.com/en/trade/BTC_USDT" target="_blank">
+					<a href="https://www.binance.com" target="_blank">
 						<img src="https://bin.bnbstatic.com/static/images/common/favicon.ico" class="site-logo" alt="Binance">
 						<div class="site-name">
 							<span>Binance</span>
@@ -19,46 +19,25 @@
 					</a>
 				</li>
 				<li class="site">
-					<a href="https://www.bitfinex.com/t/BTCUSD" target="_blank">
-						<img src="https://www.bitfinex.com/assets/icons/icon-48x48.png?v=4ebc788ff3a9cca02746390287951be5" class="site-logo" alt="Bitfinex">
+					<a href="https://www.kraken.com/" target="_blank">
+						<img src="https://www.kraken.com/favicon.ico" class="site-logo" alt="Kraken">
 						<div class="site-name">
-							<span>Bitfinex</span>
+							<span>Kraken</span>
 						</div>
 						<div class="site-rate">
-							<span>{{ rates.bitfinex }} $</span>
+							<span>{{ rates.kraken }} $</span>
 						</div>
 					</a>
 				</li>
+
 				<li class="site">
-					<a href="https://www.bitstamp.net/market/tradeview/" target="_blank">
-						<img src="https://assets.bitstamp.net/static/webapp/images/favicons/favicon-32x32.d923b7f314e9f6a118ba1253aa580fc25556d1bf.png" class="site-logo" alt="Bitstamp">
+					<a href="https://cex.io" target="_blank">
+						<img src="https://cex.io/img/favicon/favicon.ico" class="site-logo" alt="CEX">
 						<div class="site-name">
-							<span>Bitstamp</span>
+							<span>CEX</span>
 						</div>
 						<div class="site-rate">
-							<span>{{ rates.bitstamp }} $</span>
-						</div>
-					</a>
-				</li>
-				<li class="site">
-					<a href="https://www.bittrex.com/Market/Index?MarketName=BTC-USDT" target="_blank">
-						<img src="https://www.bittrex.com/favicon.ico" class="site-logo" alt="Bittrex">
-						<div class="site-name">
-							<span>Bittrex</span>
-						</div>
-						<div class="site-rate">
-							<span>{{ rates.bittrex }} $</span>
-						</div>
-					</a>
-				</li>
-				<li class="site">
-					<a href="https://www.coinbase.com/price/btc-to-usd" target="_blank">
-						<img src="https://www.coinbase.com/favicon.ico" class="site-logo" alt="Coinbase">
-						<div class="site-name">
-							<span>Coinbase</span>
-						</div>
-						<div class="site-rate">
-							<span>{{ rates.coinbase }} $</span>
+							<span>{{ rates.cex }} $</span>
 						</div>
 					</a>
 				</li>
@@ -83,10 +62,8 @@ export default {
 
 			rates: {
 				binance: 0,
-				bitfinex: 0,
-				bitstamp: 0,
-				bittrex: 0,
-				coinbase: 0,
+				kraken: 0,
+				cex: 0
 			}
 		}
 	},
@@ -119,35 +96,28 @@ export default {
 
 			/* ######################### */
 
-			const res2 = (await this.$axios.get('https://www.kucoin.com/_api/order-book/candles?symbol=' + this.first_coin + '-USDT&type=8hour&begin=1627200000&end=1641600000')).data
+			const res2 = await fetch('https://api.kraken.com/0/public/Ticker?pair=' + this.first_coin + 'USDT');
+			const data2 = await res2.json();
 
-			if(res2.data[0][4] == undefined) {
-				this.rates.bittrex = 0
+			let result = Object.values(data2.result)
+
+			if(result == undefined) {
+				this.rates.kraken = 0
 			} else {
-				this.rates.bittrex = (+res2.data[0][4]).toFixed(2)
+				this.rates.kraken = +(+result[0].c[0]).toFixed(2)
 			}
 
 			/* ######################### */
 
-			const res3 = await fetch('https://www.bitstamp.net/api/v2/ticker/' + this.currentCoin + '/');
+			const res3 = await fetch('https://cex.io/api/last_price/' + this.first_coin + '/USDT');
 			const data3 = await res3.json();
 
-			if(data3['last'] == undefined) {
-				this.rates.bitstamp = 0
+			if(data3.lprice == undefined) {
+				this.rates.cex = 0
 			} else {
-				this.rates.bitstamp = (+data3['last']).toFixed(2)
+				this.rates.cex = +(+data3.lprice).toFixed(2)
 			}
 
-			/* ######################### */
-
-			const res5 = await fetch('https://api.coinbase.com/v2/prices/' + this.first_coin + '-USD/buy');
-			const data5 = await res5.json();
-
-			if(data5.data.amount == undefined) {
-				this.rates.coinbase = 0
-			} else {
-				this.rates.coinbase = (+data5.data.amount).toFixed(2)
-			}
 		},
 
 		// async getChart() {

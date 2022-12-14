@@ -16,6 +16,13 @@
 								<div class="transaction-info-block__item-value">#{{ user.id }}</div>
 							</div>
 						</div>
+				
+						<div class="col-md-4">
+							<div class="transaction-info-block__item">
+								<div class="transaction-info-block__item-title">ФИО</div>
+								<div class="transaction-info-block__item-value">{{ user.fio }}</div>
+							</div>
+						</div>
 
 						<div class="col-md-4">
 							<div class="transaction-info-block__item">

@@ -25,7 +25,7 @@
 							<tbody>
 								<tr v-for="deposit in deposits" :key="deposit.id">
 									<th scope="row">{{ deposit.id }}</th>
-									<td>{{ deposit.user.email }}</td>
+									<td>{{ deposit.user.fio ?? deposit.user.email }}</td>
 									<td class="text-success fw-bold" v-if="deposit.type === 'deposit'">Пополнение</td>
 									<td class="text-danger fw-bold" v-if="deposit.type === 'withdrawal'">Вывод</td>
 									<td class="transaction-info-block__item-value">

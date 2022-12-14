@@ -55,8 +55,7 @@
 								<div class="exchange-info-item-value">{{ exchange_rate }}</div>
 							</div>
 							<div class="exchange-info-item">
-								<div class="exchange-info-item-title">Комиссия</div>
-								<div class="exchange-info-item-value">{{ buy.commission }}</div>
+
 							</div>
 							<div class="exchange-info-item">
 								<div class="exchange-info-item-title">Ваш баланс</div>
@@ -125,8 +124,7 @@
 								<div class="exchange-info-item-value">{{ exchange_rate }}</div>
 							</div>
 							<div class="exchange-info-item">
-								<div class="exchange-info-item-title">Комиссия</div>
-								<div class="exchange-info-item-value">{{ sell.commission }}</div>
+	
 							</div>
 							<div class="exchange-info-item" v-if="sell.coin">
 								<div class="exchange-info-item-title">Ваш баланс</div>

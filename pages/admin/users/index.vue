@@ -13,6 +13,7 @@
 							<thead>
 								<tr>
 									<th scope="col">ID</th>
+									<th scope="col">ФИО</th>
 									<th scope="col">Почта</th>
 									<th scope="col">Баланс</th>
 									<th scope="col">Статус</th>
@@ -22,6 +23,7 @@
 							<tbody>
 								<tr v-for="user in users" :key="user.id">
 									<th scope="row">{{ user.id }}</th>
+									<td>{{ user.fio ?? '-' }}</td>
 									<td>{{ user.email }}</td>
 									<td class="transaction-info-block__item-value">
 										<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> {{ +user.balance }}
