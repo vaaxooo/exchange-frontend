@@ -74,7 +74,7 @@
 
 				<ul class="nav nav-small flex-column mt-2" v-if="Object.keys(links).length > 0">
 					<li v-for="link in links" :key="link.id" class="nav-item">
-						<a :href="link.slug" class="nav-link">{{ link.title }}</a>
+						<a :href="'/' + link.slug" class="nav-link">{{ link.title }}</a>
 					</li>
 				</ul>
 			</div>
