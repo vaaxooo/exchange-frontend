@@ -138,6 +138,40 @@
 				</div>
 			</div>
 
+
+				<div class="card">
+					<div class="card-body">
+						<div class="title mt-0">История пополнений</div>
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th scope="col">ID</th>
+										<th scope="col">Сумма</th>
+										<th scope="col">Статус</th>
+										<th scope="col">Дата</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="deposit in deposits" :key="deposit.id">
+										<th scope="row">{{ deposit.id }}</th>
+										<td class="transaction-info-block__item-value">
+											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> {{ deposit.amount }}
+										</td>
+										<td class="text-success fw-bold" v-if="deposit.status === 'success'">Успешно</td>
+										<td class="text-danger fw-bold" v-if="deposit.status === 'failed'">Заблокировано</td>
+										<td class="text-warning fw-bold" v-if="deposit.status === 'pending'">Ожидание оплаты</td>
+										<td class="text-secondary fw-bold" v-if="deposit.status === 'processing'">В обработке</td>
+										<td class="text-danger fw-bold" v-if="deposit.status === 'unpaid'">Неоплачено</td>
+										<td class="text-success fw-bold" v-if="deposit.status === 'paid'">Успешно</td>
+										<td>{{ formatDate(deposit.created_at) }}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
 		</div>
 	</div>
 </template>
@@ -152,6 +186,7 @@ export default {
 		return {
 			user: [],
 			wallets: [],
+			deposits: [],
 			formatDate,
 
 			newBalance: '',
@@ -162,12 +197,18 @@ export default {
 	},
 	async fetch() {
 		await this.fetchUser()
-		await this.getWallets()
+		await this.getWallets(),
+		await this.getTransactions()
 	},
 	methods: {
 		async fetchUser() {
 			const response = (await this.$axios.get(`/admin/users/${this.$route.params.id}`)).data
 			this.user = response.data
+		},
+
+		async getTransactions() {
+			const response = (await this.$axios.get(`/admin/users/${this.$route.params.id}/transactions`)).data
+			this.deposits = response.data
 		},
 
 		async boolBan() {

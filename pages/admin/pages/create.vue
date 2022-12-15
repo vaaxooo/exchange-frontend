@@ -7,7 +7,7 @@
 		<div class="col-12">
 
 			<div class="card">
-				<div class="card-body">
+				<div class="card-body" v-if="!loading">
 
 					<div class="transaction-info-block">
 
@@ -25,7 +25,7 @@
 								</div>
 
 								<div class="transaction-info-block__item mt-3">
-									<button type="submit" class="btn btn-dark btn-block" @click="createPage">Сохранить</button>
+									<button type="button" class="btn btn-dark btn-block" @click="createPage">Сохранить</button>
 								</div>
 							</div>
 
@@ -58,21 +58,26 @@ export default {
 		return {
 			page: [],
 
-			errors: []
+			errors: [],
+			loading: false
 		}
 	},
 	methods: {
 		async createPage() {
-			const response = await this.$axios.post('/admin/pages', {
+			this.loading = true
+			const response = (await this.$axios.post('/admin/pages', {
 				title: this.page.title,
 				content: this.page.content
-			})
+			})).data
 			if(response.code === 200) {
 				this.$toast.success('Страница успешно создана')
+				this.page.title = ''
+				this.page.content = ''
 				this.$router.push('/admin/pages')
 			} else {
 				this.errors = response.data.errors
 			}
+			this.loading = false
 		}
 	}
 }

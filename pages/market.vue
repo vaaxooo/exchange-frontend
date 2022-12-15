@@ -2,9 +2,6 @@
 
 	<div class="content mt-3">
 		<div class="row">
-			<div class="text-right p-2" v-if="Object.keys(wallets).length >= 6">
-				<a href="#" class="text-link text-decoration-none text-muted">Посмотреть все</a>
-			</div>
 
 			<div class="coins-list row px-0 mx-0 mb-3" v-if="wallets">
 				<my-coins v-for="wallet in wallets" :key="wallet.id" :wallet="wallet" />

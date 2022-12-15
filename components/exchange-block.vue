@@ -195,14 +195,14 @@ export default {
 		},
 
 		'buy.price'() {
-			if(this.buy.price !== '') {
+			if(this.buy.price.length > 0 && this.buy.price !== '0') {
 				this.buy.amount = this.buy.price * this.exchange_rate
 				this.calculate()
 			}
 		},
 
 		'buy.amount'() {
-			if(this.buy.amount !== '') {
+			if(this.buy.amount.length > 0 && this.buy.amount !== '0') {
 				this.buy.price = (this.buy.amount / this.exchange_rate)
 				this.calculate()
 			}
@@ -216,7 +216,7 @@ export default {
 		},
 
 		'sell.amount'() {
-			if(this.sell.amount !== '') {
+			if(this.sell.amount.length > 0 && this.sell.amount !== '0') {
 				this.sell.price = (this.sell.amount / this.exchange_rate)
 				this.calculate()
 			}
@@ -247,6 +247,7 @@ export default {
 			})).data
 			if(response.code === 200) {
 				this.$toast.success(response.message)
+				this.$router.go('/market')
 			} else {
 				this.$toast.error(response.message)
 			}
@@ -267,6 +268,7 @@ export default {
 					...this.$auth.user,
 					wallets: this.wallets
 				})
+				this.$router.go('/market')
 			} else {
 				this.$toast.error(response.message)
 			}

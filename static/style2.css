@@ -472,7 +472,7 @@ iframe#tradingview_00bdb {
 }
 
 .coin-desc {
-    display: inline-block;
+    display: block;
 }
 
 img {
@@ -561,7 +561,7 @@ img.site-logo {
     font-size: 18px;
     color: #fff;
     position: absolute;
-    right: 50px;
+    right: 40%;
     font-weight: 600;
 }
 

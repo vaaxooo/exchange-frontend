@@ -32,6 +32,12 @@
 				</li>
 
 				<li class="nav-item">
+					<a class="nav-link" href="/profile" v-if="$auth.user">
+						<span class="material-symbols-outlined">person</span> Личный кабинет
+					</a>
+				</li>
+
+				<li class="nav-item">
 					<a class="nav-link" href="/market" v-if="$auth.user">
 						<span class="material-symbols-outlined">currency_exchange</span> Маркет
 					</a>
@@ -46,12 +52,6 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/withdrawal" v-if="$auth.user">
 						<span class="material-symbols-outlined">wallet</span> Вывод средств
-					</a>
-				</li>
-
-				<li class="nav-item">
-					<a class="nav-link" href="/settings" v-if="$auth.user">
-						<span class="material-symbols-outlined">settings</span> Настройки
 					</a>
 				</li>
 
@@ -74,7 +74,7 @@
 
 				<ul class="nav nav-small flex-column mt-2" v-if="Object.keys(links).length > 0">
 					<li v-for="link in links" :key="link.id" class="nav-item">
-						<a :href="'/' + link.slug" class="nav-link">{{ link.title }}</a>
+						<a :href="'/' + link.slug" class="nav-link">{{ link.title ?? 'Не указано' }}</a>
 					</li>
 				</ul>
 			</div>

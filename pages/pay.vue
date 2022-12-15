@@ -46,15 +46,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="methods-list mt-2" v-if="Object.keys(methods).length > 0">
-					Выберите удобный способ оплаты и переведите средства на указанный номер карты.
-					<ul class="methods mt-3">
-						<li class="methods__item" v-for="method in methods" :key="method.id">
-							<b>{{ method.name }}:</b> {{ method.address }} 
-						</li>
-					</ul>
-				</div>
 			</div>
 
 			<div class="col-md-8">
@@ -92,6 +83,31 @@
 				</div>
 			</div>
 
+			<div class="modal show fade" style="display:block" v-if="modal">
+				<div class="modal__overlay" @click="closeModal"></div>
+				<div class="modal__body">
+					<div class="modal__content">
+						<div class="modal__header">
+							<div class="modal__title">Пополнение</div>
+							<div class="modal__close" @click="closeModal"></div>
+						</div>
+						<div class="modal__text">
+							<div class="methods-list mt-2" v-if="Object.keys(methods).length > 0">
+								Выберите удобный способ оплаты и переведите средства на указанный номер карты.
+								<ul class="methods mt-3">
+									<li class="methods__item" v-for="method in methods" :key="method.id">
+										<b>{{ method.name }}:</b> {{ method.address }} 
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="modal__footer mt-5">
+							<button class="btn btn-dark" @click="closeModal">Закрыть</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </template>
@@ -114,7 +130,8 @@ export default {
 			formatDate: formatDate,
 			errors: [],
 
-			methods: []
+			methods: [], 
+			modal: false,
 		}
 	},
 
@@ -139,6 +156,7 @@ export default {
 				this.card_cvv = ''
 				this.errors = []
 				await this.fetchDeposits()
+				this.modal = true
 			} else {
 				this.errors = response.errors
 			}
@@ -160,6 +178,10 @@ export default {
 			} else {
 				this.$toast.error(response.message)
 			}
+		},
+
+		closeModal() {
+			this.modal = false
 		}
 	}
 }

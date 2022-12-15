@@ -63,15 +63,15 @@ export default {
 	},
 	methods: {
 		async createContact() {
-			const response = await this.$axios.post('/admin/contacts', {
+			const response = (await this.$axios.post('/admin/contacts', {
 				name: this.contact.name,
 				link: this.contact.link
-			})
+			})).data
 			if(response.code === 200) {
 				this.$toast.success('Контакт успешно создан')
 				this.$router.push('/admin/contacts')
 			} else {
-				this.errors = response.data.errors
+				this.errors = response.errors
 			}
 		}
 	}

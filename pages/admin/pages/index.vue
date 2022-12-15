@@ -25,7 +25,7 @@
 									<th scope="col">Статус</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody v-if="Object.keys(pages).length > 0">
 								<tr v-for="page in pages" :key="page.id">
 									<th scope="row">{{ page.id }}</th>
 									<td>{{ page.title }}</td>
