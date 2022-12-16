@@ -9,7 +9,7 @@
 
 
 			<div class="col-md-4">
-				<exchange-block :wallets="wallets" />
+				<arbitrage-block :wallets="wallets" />
 			</div>
 
 			<div class="col-md-8">
@@ -27,6 +27,7 @@
 							<table class="table table-hover">
 								<thead>
 									<tr>
+										<th scope="col">Биржа</th>
 										<th scope="col">Криптовалюта</th>
 										<th scope="col">Тип</th>
 										<th scope="col">Количество</th>
@@ -38,6 +39,9 @@
 								</thead>
 								<tbody v-if="Object.keys(transactions).length > 0">
 									<tr v-for="transaction in transactions" :key="transaction.id">
+										<td class="transaction-info-block__item-value">
+											{{ transaction.exchange ? transaction.exchange[0].toUpperCase() + transaction.exchange.slice(1) : '-' }}
+										</td>
 										<td class="transaction-info-block__item-value" v-if="transaction.type === 'buy'">
 											<img :src="'/icons/' + transaction.coin_to.symbol + '.png'" :alt="transaction.coin_from.symbol" class="transaction-info-block__item-value-icon"> {{ transaction.coin_to.name }}
 										</td>
@@ -58,7 +62,7 @@
 											<img src="/icons/usdt.png" alt="usdt" class="transaction-info-block__item-value-icon"> {{ +(transaction.amountTo).toFixed(2) }}
 										</td>
 
-										<td>{{ transaction.commission }}</td>
+										<td>{{ (+transaction.commission).toFixed(8) }}</td>
 
 										<td class="text-success fw-bold" v-if="transaction.status === 'success'">Успешно</td>
 										<td class="text-danger fw-bold" v-if="transaction.status === 'failed'">Заблокировано</td>
@@ -106,7 +110,7 @@ export default {
 		},
 
 		async getTransactions() {
-			const response = (await this.$axios.get('/transactions?type=market')).data
+			const response = (await this.$axios.get('/transactions?type=arbitrage')).data
 			this.transactions = response.data
 		}
 	}

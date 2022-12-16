@@ -129,6 +129,7 @@
 										<table class="table table-hover">
 											<thead>
 												<tr>
+													<th scope="col">Биржа</th>
 													<th scope="col">Криптовалюта</th>
 													<th scope="col">Тип</th>
 													<th scope="col">Количество</th>
@@ -140,6 +141,9 @@
 											</thead>
 											<tbody v-if="Object.keys(transactions).length > 0">
 												<tr v-for="transaction in transactions" :key="transaction.id">
+													<td>
+														{{ transaction.exchange ? transaction.exchange[0].toUpperCase() + transaction.exchange.slice(1) : '-' }}
+													</td>
 													<td class="transaction-info-block__item-value" v-if="transaction.type === 'buy'">
 														<img :src="'/icons/' + transaction.coin_to.symbol + '.png'" :alt="transaction.coin_from.symbol" class="transaction-info-block__item-value-icon"> {{ transaction.coin_to.name }}
 													</td>

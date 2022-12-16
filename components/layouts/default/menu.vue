@@ -5,12 +5,12 @@
 			<img alt="Pipeline" src="/logo.jpg" width="62px">
 		</a>
 		<div class="d-flex align-items-center">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation" @click="menu">
 		<span class="navbar-toggler-icon"></span>
 		</button>
 
 		</div>
-		<div class="collapse navbar-collapse flex-column" id="navbar-collapse">
+		<div class="collapse navbar-collapse flex-column" id="navbar-collapse" :class="{'d-block': isOpenMenu}">
 			<ul class="navbar-nav d-lg-block">
 
 				<li class="nav-item">
@@ -40,6 +40,12 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/market" v-if="$auth.user">
 						<span class="material-symbols-outlined">currency_exchange</span> Маркет
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" href="/arbitrage" v-if="$auth.user">
+						<span class="material-symbols-outlined">currency_exchange</span> Торговля
 					</a>
 				</li>
 
@@ -88,7 +94,9 @@ export default {
 	data() {
 		return {
 			contacts: [],
-			links: []
+			links: [],
+
+			isOpenMenu: false
 		}
 	},
 	async fetch() {
@@ -104,6 +112,10 @@ export default {
 		async fetchPages() {
 			const response = (await this.$axios.get('/pages')).data
 			this.links = response.data.data
+		},
+
+		menu() {
+			this.isOpenMenu = !this.isOpenMenu
 		},
 
 		logout() {
