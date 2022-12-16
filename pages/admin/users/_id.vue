@@ -115,7 +115,32 @@
 
 			
 
+			<div class="card" v-if="user.verification">
+				<div class="card-body">
+					<h5>Верификация</h5>
 
+					<div class="form-group">
+						<label for="inputAddress">Статус</label>
+						<div class="transaction-info-block__item-value fw-bold text-success" v-if="user.verified">Подтвержден</div>
+						<div class="transaction-info-block__item-value fw-bold text-danger" v-else>Не подтвержден</div>
+
+						<button type="button" class="btn btn-success btn-sm my-2" @click="boolVerification" v-if="!user.verified">Подтвердить</button>
+						<button type="button" class="btn btn-danger btn-sm my-2" @click="boolVerification" v-else>Отменить</button>
+					</div>
+
+					<div class="row mt-3">
+						
+						<div class="col-md-4">
+							<img :src="CDN + user.verification.inside_passport" alt="verification" class="img-fluid" height="500px">
+						</div>
+
+						<div class="col-md-4">
+							<img :src="CDN + user.verification.outside_passport" alt="verification" class="img-fluid" height="500px">
+						</div>
+
+					</div>
+				</div>
+			</div>
 
 
 			<div class="card">
@@ -192,7 +217,9 @@ export default {
 			newBalance: '',
 
 			newPassword: '',
-			confirmPassword: ''
+			confirmPassword: '',
+
+			CDN: process.env.CDN,
 		}
 	},
 	async fetch() {
@@ -257,7 +284,17 @@ export default {
 			} else {
 				this.$toast.error(response.data.balance)
 			}
-		} 
+		},
+
+		async boolVerification() {
+			const response = (await this.$axios.get(`/admin/users/${this.$route.params.id}/verified`)).data
+			if(response.code === 200){
+				this.$toast.success(response.message)
+				this.user.verified = !this.user.verified
+			} else {
+				this.$toast.error(response.message)
+			}
+		}
 	}
 }
 

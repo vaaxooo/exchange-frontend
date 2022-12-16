@@ -2,11 +2,20 @@
 	<div class="card mt-1" v-if="currentCoin">
 		<div class="card-body p-3">
 
-			<div class="pair-switcher">{{ currentCoin }}</div>
-
 			<!-- <div class="trading_terminal" id="trading_terminal"></div> -->
 
 			<ul class="trande-sites">
+				<li class="site">
+					<a>
+						<div class="site-name">
+							<span>Биржа</span>
+						</div>
+						<div class="site-rate">
+							<span>Курс в долларах</span>
+						</div>
+					</a>
+				</li>
+
 				<li class="site">
 					<a href="#">
 						<img src="https://bin.bnbstatic.com/static/images/common/favicon.ico" class="site-logo" alt="Binance">

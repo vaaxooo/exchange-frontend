@@ -119,7 +119,7 @@ export default {
 		},
 
 		logout() {
-			window.location.href = '/auth/login'
+			location.href = '/auth/login'
 			this.$auth.logout()
 		}
 	}

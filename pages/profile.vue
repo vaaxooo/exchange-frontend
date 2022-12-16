@@ -35,9 +35,54 @@
 									<div class="transaction-info-block__item-value">{{ formatDate($auth.user.created_at) }}</div>
 								</div>
 							</div>
+
+							<div class="col-md-4">
+								<div class="transaction-info-block__item">
+									<div class="transaction-info-block__item-title">Верификация</div>
+									<div class="transaction-info-block__item-value">{{ $auth.user.verified ? 'Верифицирован' : 'Не верифицирован' }}</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="verification text-warning" v-if="$auth.user.verification && !$auth.user.verified">
+							Ваш запрос на верификацию был отправлен. Ожидайте ответа.
+						</div>
+
+						<div class="verification text-warning" v-if="!$auth.user.verification && !$auth.user.verified">
+							Вы еще не отправляли запрос на верификацию.
 						</div>
 					</div>
 				</div>
+
+				<section v-if="!$auth.user.verified">
+					<div class="title">Верификация</div>
+					<div class="card">
+						<div class="card-body p-3">
+							Подтвердите личность с помощью документа удостоверяющего личность
+							<div class="row mt-2">
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>Документ №1</label>
+										<input type="file" class="form-control" @change="uploadFile($event, 'inside_passport')" :class="{'is-invalid': errors.inside_passport}">
+										<div class="invalid-feedback" v-if="errors.inside_passport">{{ errors.inside_passport[0] }}</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>Документ №2</label>
+										<input type="file" class="form-control" @change="uploadFile($event, 'outside_passport')" :class="{'is-invalid': errors.outside_passport}">
+										<div class="invalid-feedback" v-if="errors.outside_passport">{{ errors.outside_passport[0] }}</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group mx-auto m-auto vertical-with-input">
+										<button class="btn btn-dark" type="submit" @click="sendVerification">Отправить</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 
 				<div class="title">Изменение пароля</div>
 
@@ -199,6 +244,11 @@ export default {
 
 			wallets: [],
 			transactions: [],
+
+			documents: {
+				inside_passport: '',
+				outside_passport: '',
+			}
 		}
 	},
 	async fetch() {
@@ -228,6 +278,33 @@ export default {
 				} else {
 					this.$toast.error(response.message)
 				}
+			}
+		},
+
+		async uploadFile(e, name) {
+			if(name === 'inside_passport') {
+				this.documents.inside_passport = e.target.files[0]
+			} else {
+				this.documents.outside_passport = e.target.files[0]
+			}
+			console.log(this.documents)
+			// this.documents.inside_passport = this.$refs.files[0]
+			// this.documents.outside_passport = this.$refs.files[1]
+		},
+
+		async sendVerification() {
+			const formData = new FormData()
+			formData.append('inside_passport', this.documents.inside_passport)
+			formData.append('outside_passport', this.documents.outside_passport)
+			const response = (await this.$axios.post('/user/verification', formData)).data
+			if (response.code === 200) {
+				this.$toast.success('Запрос на верификацию успешно отправлен! Пожалуйста, подождите, пока мы проверим ваши документы.')
+				this.documents = {
+					inside_passport: '',
+					outside_passport: '',
+				}
+			} else {
+				this.$toast.error(response.message)
 			}
 		},
 
