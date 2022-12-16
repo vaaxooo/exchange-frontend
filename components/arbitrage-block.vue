@@ -222,30 +222,38 @@ export default {
 		},
 
 		'buy.price'() {
-			if(this.buy.price.length > 0 && this.buy.price !== '0') {
-				this.buy.amount = this.buy.price * this.rate
+			if(this.sell.price !== '') {
+				this.buy.amount = +this.buy.price * +this.rate
 				this.calculate()
+			} else {
+				this.buy.amount = 0
 			}
 		},
 
 		'buy.amount'() {
-			if(this.buy.amount.length > 0 && this.buy.amount !== '0') {
-				this.buy.price = (this.buy.amount / this.rate)
+			if(this.sell.price !== '') {
+				this.buy.price = (+this.buy.amount / +this.rate)
 				this.calculate()
+			} else {
+				this.buy.price = 0
 			}
 		},
 
 		'sell.price'() {
 			if(this.sell.price !== '') {
-				this.sell.amount = this.sell.price * this.rate
+				this.sell.amount = +this.sell.price * +this.rate
 				this.calculate()
+			} else {
+				this.sell.amount = 0
 			}
 		},
 
 		'sell.amount'() {
-			if(this.sell.amount.length > 0 && this.sell.amount !== '0') {
-				this.sell.price = (this.sell.amount / this.rate)
+			if(this.sell.price !== '') {
+				this.sell.price = (+this.sell.amount / +this.rate)
 				this.calculate()
+			} else {
+				this.sell.price = 0
 			}
 		}
 	},
@@ -295,7 +303,7 @@ export default {
 			} else {
 				this.rates.cex = +(+data3.lprice).toFixed(2)
 			}
-
+			this.rate = this.rates[this.buy.exchange]
 		},
 
 		async fetchCoins() {
