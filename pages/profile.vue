@@ -7,12 +7,6 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="row">
-							<div class="col-md-4">
-								<div class="transaction-info-block__item">
-									<div class="transaction-info-block__item-title">Номер</div>
-									<div class="transaction-info-block__item-value">#{{ $auth.user.id }}</div>
-								</div>
-							</div>
 					
 							<div class="col-md-4">
 								<div class="transaction-info-block__item">
