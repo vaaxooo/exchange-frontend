@@ -194,14 +194,14 @@ export default {
 			this.$nuxt.$emit('changeCoin', this.sell.coin)
 		},
 
-		'buy.price'() {
-			if(this.buy.price !== '') {
-				this.buy.amount = this.buy.price * this.exchange_rate
-				this.calculate()
-			} else {
-				this.buy.amount = 0
-			}
-		},
+		// 'buy.price'() {
+		// 	if(this.buy.price !== '') {
+		// 		this.buy.amount = this.buy.price * this.exchange_rate
+		// 		this.calculate()
+		// 	} else {
+		// 		this.buy.amount = 0
+		// 	}
+		// },
 
 		'buy.amount'() {
 			if(this.buy.amount !== '') {
@@ -221,14 +221,14 @@ export default {
 			}
 		},
 
-		'sell.amount'() {
-			if(this.sell.price !== '') {
-				this.sell.price = (this.sell.amount / this.exchange_rate)
-				this.calculate()
-			} else {
-				this.sell.price = 0
-			}
-		}
+		// 'sell.amount'() {
+		// 	if(this.sell.price !== '') {
+		// 		this.sell.price = (this.sell.amount / this.exchange_rate)
+		// 		this.calculate()
+		// 	} else {
+		// 		this.sell.price = 0
+		// 	}
+		// }
 	},
 	async fetch() {
 		await this.fetchCoins()
