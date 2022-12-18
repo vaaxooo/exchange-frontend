@@ -70,7 +70,8 @@
 
 			<div class="row">
 				<div class="col-md-12">
-					<button type="button" class="btn btn-dark btn-block" @click="exchangeBuy">Купить</button>
+					<button type="button" class="btn btn-dark btn-block" @click="exchangeBuy" v-if="+buy.price !== 0 && +buy.amount !== 0">Купить</button>
+					<button type="button" class="btn btn-dark btn-block" disabled v-else>Купить</button>
 				</div>
 			</div>
 
@@ -139,7 +140,8 @@
 
 			<div class="row">
 				<div class="col-md-12">
-					<button type="button" class="btn btn-dark btn-block" @click="exchangeSell">Продать</button>
+					<button type="button" class="btn btn-dark btn-block" @click="exchangeSell" v-if="+sell.amount !== 0 && +sell.price !== 0">Продать</button>
+					<button type="button" class="btn btn-dark btn-block" disabled v-else>Продать</button>
 				</div>
 			</div>
 
