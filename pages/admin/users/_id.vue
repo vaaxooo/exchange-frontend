@@ -138,6 +138,10 @@
 							<img :src="CDN + user.verification.outside_passport" alt="verification" class="img-fluid" height="500px">
 						</div>
 
+						<div class="col-md-4">
+							<img :src="CDN + user.verification.place_passport" alt="verification" class="img-fluid" height="500px">
+						</div>
+
 					</div>
 				</div>
 			</div>

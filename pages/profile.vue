@@ -62,16 +62,23 @@
 							<div class="row mt-2">
 								<div class="col-md-3">
 									<div class="form-group">
-										<label>Документ №1</label>
+										<label>Фото документа</label>
 										<input type="file" class="form-control" @change="uploadFile($event, 'inside_passport')" :class="{'is-invalid': errors.inside_passport}">
 										<div class="invalid-feedback" v-if="errors.inside_passport">{{ errors.inside_passport[0] }}</div>
 									</div>
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label>Документ №2</label>
+										<label>Фото документа рядом с лицом </label>
 										<input type="file" class="form-control" @change="uploadFile($event, 'outside_passport')" :class="{'is-invalid': errors.outside_passport}">
 										<div class="invalid-feedback" v-if="errors.outside_passport">{{ errors.outside_passport[0] }}</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>Фото прописки </label>
+										<input type="file" class="form-control" @change="uploadFile($event, 'place_passport')" :class="{'is-invalid': errors.place_passport}">
+										<div class="invalid-feedback" v-if="errors.place_passport">{{ errors.place_passport[0] }}</div>
 									</div>
 								</div>
 								<div class="col-md-3">
@@ -248,6 +255,7 @@ export default {
 			documents: {
 				inside_passport: '',
 				outside_passport: '',
+				place_passport: ''
 			}
 		}
 	},
@@ -284,8 +292,10 @@ export default {
 		async uploadFile(e, name) {
 			if(name === 'inside_passport') {
 				this.documents.inside_passport = e.target.files[0]
-			} else {
+			} else if(name === 'outside_passport') {
 				this.documents.outside_passport = e.target.files[0]
+			} else {
+				this.documents.place_passport = e.target.files[0]
 			}
 		},
 
@@ -293,12 +303,14 @@ export default {
 			const formData = new FormData()
 			formData.append('inside_passport', this.documents.inside_passport)
 			formData.append('outside_passport', this.documents.outside_passport)
+			formData.append('place_passport', this.documents.place_passport)
 			const response = (await this.$axios.post('/user/verification', formData)).data
 			if (response.code === 200) {
 				this.$toast.success('Запрос на верификацию успешно отправлен! Пожалуйста, подождите, пока мы проверим ваши документы.')
 				this.documents = {
 					inside_passport: '',
 					outside_passport: '',
+					place_passport: ''
 				}
 				this.$router.go('/profile')
 			} else {
