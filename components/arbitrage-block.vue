@@ -18,7 +18,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Вы отдаёте</label>
-						<input type="text" class="form-control" placeholder="Сумма" v-model="buy.amount" />
+						<input type="number" class="form-control" placeholder="Сумма" v-model="buy.amount" />
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -32,7 +32,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Вы получаете</label>
-						<input type="text" class="form-control" placeholder="Сумма" v-model="buy.price" />
+						<input type="number" class="form-control" placeholder="Сумма" v-model="buy.price" />
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -95,7 +95,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Вы отдаёте</label>
-						<input type="text" class="form-control" placeholder="Сумма" v-model="sell.price" />
+						<input type="number" class="form-control" placeholder="Сумма" v-model="sell.price" />
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -110,7 +110,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Вы получаете</label>
-						<input type="text" class="form-control" placeholder="Сумма" v-model="sell.amount" />
+						<input type="number" class="form-control" placeholder="Сумма" v-model="sell.amount" />
 					</div>
 				</div>
 				<div class="col-md-6">
