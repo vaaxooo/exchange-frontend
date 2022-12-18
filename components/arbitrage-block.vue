@@ -222,7 +222,7 @@ export default {
 		},
 
 		'buy.price'() {
-			if(this.sell.price !== '') {
+			if(this.buy.price !== '') {
 				this.buy.amount = +this.buy.price * +this.rate
 				this.calculate()
 			} else {
@@ -231,7 +231,7 @@ export default {
 		},
 
 		'buy.amount'() {
-			if(this.sell.price !== '') {
+			if(this.buy.amount !== '') {
 				this.buy.price = (+this.buy.amount / +this.rate)
 				this.calculate()
 			} else {

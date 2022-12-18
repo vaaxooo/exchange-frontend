@@ -287,9 +287,6 @@ export default {
 			} else {
 				this.documents.outside_passport = e.target.files[0]
 			}
-			console.log(this.documents)
-			// this.documents.inside_passport = this.$refs.files[0]
-			// this.documents.outside_passport = this.$refs.files[1]
 		},
 
 		async sendVerification() {
@@ -303,6 +300,7 @@ export default {
 					inside_passport: '',
 					outside_passport: '',
 				}
+				this.$router.go('/profile')
 			} else {
 				this.$toast.error(response.message)
 			}

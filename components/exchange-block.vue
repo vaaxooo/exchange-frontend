@@ -18,7 +18,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Вы отдаёте</label>
-						<input type="text" class="form-control" placeholder="Сумма" v-model="buy.amount" />
+						<input type="number" class="form-control" placeholder="Сумма" v-model="buy.amount" id="buy_amount" />
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -32,7 +32,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Вы получаете</label>
-						<input type="text" class="form-control" placeholder="Сумма" v-model="buy.price" />
+						<input type="number" class="form-control" placeholder="Сумма" v-model="buy.price" id="buy_price" />
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -86,7 +86,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Вы отдаёте</label>
-						<input type="text" class="form-control" placeholder="Сумма" v-model="sell.price" />
+						<input type="number" class="form-control" placeholder="Сумма" v-model="sell.price" id="sell_price" />
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -103,7 +103,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Вы получаете</label>
-						<input type="text" class="form-control" placeholder="Сумма" v-model="sell.amount" />
+						<input type="number" class="form-control" placeholder="Сумма" v-model="sell.amount" id="sell_amount" />
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -195,7 +195,7 @@ export default {
 		},
 
 		'buy.price'() {
-			if(this.sell.price !== '') {
+			if(this.buy.price !== '') {
 				this.buy.amount = this.buy.price * this.exchange_rate
 				this.calculate()
 			} else {
@@ -204,7 +204,7 @@ export default {
 		},
 
 		'buy.amount'() {
-			if(this.sell.price !== '') {
+			if(this.buy.amount !== '') {
 				this.buy.price = (this.buy.amount / this.exchange_rate)
 				this.calculate()
 			} else {
@@ -222,7 +222,7 @@ export default {
 		},
 
 		'sell.amount'() {
-			if(this.sell.amount.length > 0 && this.sell.amount !== '0') {
+			if(this.sell.price !== '') {
 				this.sell.price = (this.sell.amount / this.exchange_rate)
 				this.calculate()
 			} else {
