@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import formatDate from '@/plugins/formatDate'
+import formatDate from '~/plugins/formatDate'
 
 export default {
   	name: 'IndexPage',

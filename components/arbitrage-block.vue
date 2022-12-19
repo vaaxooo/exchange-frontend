@@ -331,7 +331,7 @@ export default {
 			})).data
 			if(response.code === 200) {
 				this.$toast.success(response.message)
-				this.$router.go('/market')
+				this.$router.go('/arbitrage')
 			} else {
 				this.$toast.error(response.message)
 			}
@@ -354,7 +354,7 @@ export default {
 					...this.$auth.user,
 					wallets: this.wallets
 				})
-				//this.$router.go('/market')
+				this.$router.go('/arbitrage')
 			} else {
 				this.$toast.error(response.message)
 			}
