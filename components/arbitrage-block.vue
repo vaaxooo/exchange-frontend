@@ -206,7 +206,8 @@ export default {
 			rates: {
 				binance: 0,
 				kraken: 0,
-				cex: 0
+				cex: 0,
+				whitebit: 0,
 			},
 
 			coins: []
@@ -306,6 +307,19 @@ export default {
 				this.rates.cex = +(+data3.lprice).toFixed(2)
 			}
 			this.rate = this.rates[this.buy.exchange]
+
+
+			/* ######################### */
+
+			const res4 = await fetch('https://internal.whitebit.com/v2/markets/BTC_USDT');
+			const data4 = await res4.json();
+
+			if(data4.data == undefined) {
+				this.rates.whitebit = 0
+			} else {
+				this.rates.whitebit = +(+data4.data.lastPrice).toFixed(2)
+			}
+
 		},
 
 		async fetchCoins() {

@@ -50,6 +50,20 @@
 						</div>
 					</a>
 				</li>
+
+
+				<li class="site">
+					<a href="#">
+						<img src="https://whitebit.com/favicon.svg" class="site-logo" alt="OKX">
+						<div class="site-name">
+							<span>WhiteBit</span>
+						</div>
+						<div class="site-rate">
+							<span>{{ rates.okx }} $</span>
+						</div>
+					</a>
+				</li>
+
 			</ul>
 
 
@@ -72,7 +86,8 @@ export default {
 			rates: {
 				binance: 0,
 				kraken: 0,
-				cex: 0
+				cex: 0,
+				okx: 0
 			}
 		}
 	},
@@ -125,6 +140,17 @@ export default {
 				this.rates.cex = 0
 			} else {
 				this.rates.cex = +(+data3.lprice).toFixed(2)
+			}
+
+			/* ######################### */
+
+			const res4 = await fetch('https://internal.whitebit.com/v2/markets/BTC_USDT');
+			const data4 = await res4.json();
+
+			if(data4.data == undefined) {
+				this.rates.okx = 0
+			} else {
+				this.rates.okx = +(+data4.data.lastPrice).toFixed(2)
 			}
 
 		},
