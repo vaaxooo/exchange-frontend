@@ -44,7 +44,7 @@
 										<a :href="'/admin/withdrawals/' + deposit.id" class="btn btn-light btn-sm btn-icon">
 											<span class="material-icons">edit</span>
 										</a>
-										<a href="#" class="btn btn-danger btn-sm btn-icon">
+										<a href="#" class="btn btn-danger btn-sm btn-icon" @click="deleteWithdrawal(deposit.id)">
 											<span class="material-icons">delete</span>
 										</a>
 									</td>
@@ -77,6 +77,16 @@ export default {
 		async fetchDeposits() {
 			const response = (await this.$axios.get("/admin/payments")).data;
 			this.deposits = response.data.data;
+		},
+
+		async deleteWithdrawal(id) {
+			const response = (await this.$axios.delete("/admin/payments/" + id)).data;
+			if (response.code === 200) {
+				this.$toast.success("Вывод успешно удален");
+				this.deposits = this.deposits.filter((item) => item.id !== id);
+			} else {
+				this.$toast.error("Ошибка при удалении вывода");
+			}
 		}
 	}
 }
