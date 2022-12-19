@@ -32,13 +32,13 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" href="/profile" v-if="$auth.user">
+					<a class="nav-link" href="/" v-if="$auth.user">
 						<span class="material-symbols-outlined">person</span> Личный кабинет
 					</a>
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" href="/" v-if="$auth.user">
+					<a class="nav-link" href="/market" v-if="$auth.user">
 						<span class="material-symbols-outlined">currency_exchange</span> Маркет
 					</a>
 				</li>
