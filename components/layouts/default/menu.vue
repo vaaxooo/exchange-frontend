@@ -13,11 +13,11 @@
 		<div class="collapse navbar-collapse flex-column" id="navbar-collapse" :class="{'d-block': isOpenMenu}">
 			<ul class="navbar-nav d-lg-block">
 
-				<li class="nav-item">
+				<!-- <li class="nav-item">
 					<a class="nav-link" href="/">
 						<span class="material-symbols-outlined">home</span> Главная
 					</a>
-				</li>
+				</li> -->
 
 				<li class="nav-item" v-if="!$auth.user">
 					<a class="nav-link" href="/auth/login">
@@ -38,7 +38,7 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" href="/market" v-if="$auth.user">
+					<a class="nav-link" href="/" v-if="$auth.user">
 						<span class="material-symbols-outlined">currency_exchange</span> Маркет
 					</a>
 				</li>
