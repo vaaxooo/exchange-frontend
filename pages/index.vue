@@ -155,7 +155,8 @@
 														<img :src="'/icons/' + wallet.coin.symbol + '.png'" alt="coin" style="vertical-align: middle;" width="24px">
 														{{ wallet.coin.name }}
 													</td>
-													<td>{{ wallet.balance }}</td>
+													<td v-if="wallet.coin.symbol !== 'usdt'">{{ wallet.balance }}</td>
+													<td v-else>{{ $auth.user.balance }}</td>
 												</tr>
 											</tbody>
 										</table>
