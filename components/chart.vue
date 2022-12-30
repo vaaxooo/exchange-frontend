@@ -61,6 +61,7 @@ export default {
 				item.high = data[i][2];
 				item.low = data[i][3];
 				item.close = data[i][4];
+
 				this.atrs.push(item);
 			}
 			this.updateChart();

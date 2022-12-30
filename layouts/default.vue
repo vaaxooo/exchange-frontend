@@ -14,6 +14,13 @@
 <script>
 
 export default {
+	head() {
+		return {
+			script: [
+				{ src: "//code.jivosite.com/widget/zMXkGx4Vhm", async: true }
+			],
+		}
+	},
 	data() {
 		return {
 			links: []
