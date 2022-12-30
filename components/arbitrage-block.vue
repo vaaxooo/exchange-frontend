@@ -37,7 +37,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-group mx-auto m-auto vertical-with-input">
-						<input type="text" class="form-control disabled" disabled v-model="buy.coin">
+						<input type="text" class="form-control disabled" disabled value="BTC">
 					</div>
 				</div>
 			</div>
@@ -101,7 +101,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-group mx-auto m-auto vertical-with-input">
-						<input type="text" class="form-control disabled" disabled v-model="sell.coin">
+						<input type="text" class="form-control disabled" disabled value="BTC">
 					</div>
 				</div>
 			</div>
