@@ -13,43 +13,7 @@
 			</div>
 
 			<div class="col-md-8">
-				
-				<div class="card mt-1" v-if="Object.keys(coins).length > 0">
-					<div class="card-body p-3">
-
-						<!-- <div class="trading_terminal" id="trading_terminal"></div> -->
-
-						<ul class="trande-sites">
-							<li class="site">
-								<a>
-									<div class="site-name">
-										<span>Криптовалюта</span>
-									</div>
-									<div class="site-rate">
-										<span>Курс в долларах</span>
-									</div>
-								</a>
-							</li>
-
-							<li class="site" v-for="coin in coins" :key="coin.id">
-								<a href="#">
-									<img :src="'/icons/' + coin.symbol + '.png'" :alt="coin.symbol" class="site-icon">
-									<div class="site-name">
-										<span>{{ coin.name }}</span>
-									</div>
-									<div class="site-rate">
-										<span>{{ coin.exchange_rate }} $</span>
-									</div>
-								</a>
-							</li>
-
-						</ul>
-
-
-					</div>
-				</div>
-
-
+				<chart />
 			</div>
 
 

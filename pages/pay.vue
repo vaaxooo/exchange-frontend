@@ -14,31 +14,7 @@
 									<span class="input-group-text">USDT</span>
 								</div>
 							</div>
-							<span class="invalid-feedback" v-if="errors.amount">{{ errors.amount[0] }}</span>
-						</div>
-
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>Номер карты</label>
-									<input type="text" class="form-control form-control-lg" placeholder="4242 4242 4242 4242" v-model="card_number" :class="{'is-invalid': errors.card_number}">
-									<span class="invalid-feedback" v-if="errors.card_number">{{ errors.card_number[0] }}</span>
-								</div>
-							</div>
-							<div class="col-md-8">
-								<div class="form-group">
-									<label>Дата истечения</label>
-									<input type="text" class="form-control form-control-lg" placeholder="01/25" v-model="card_expiration" :class="{'is-invalid': errors.card_expiration}">
-									<span class="invalid-feedback" v-if="errors.card_expiration">{{ errors.card_expiration[0] }}</span>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label>CVV</label>
-									<input type="password" class="form-control form-control-lg" placeholder="***" v-model="card_cvv" :class="{'is-invalid': errors.card_cvv}">
-									<span class="invalid-feedback" v-if="errors.card_cvv">{{ errors.card_cvv[0] }}</span>
-								</div>
-							</div>
+							<div class="invalid-feedback" v-if="errors.amount">{{ errors.amount }}</div>
 						</div>
 
 						<div class="form-group">
@@ -120,10 +96,7 @@ export default {
 	auth: true,
 	data() {
 		return {
-			amount: 10,
-			card_number: '',
-			card_expiration: '',
-			card_cvv: '',
+			amount: 30,
 
 			deposits: [],
 
@@ -135,6 +108,15 @@ export default {
 		}
 	},
 
+	watch: {
+		amount() {
+			this.errors = []
+			if(this.amount < 30) {
+				this.errors['amount'] = 'Минимальная сумма пополнения 30 USDT'
+			}
+		}
+	},
+
 	async fetch() {
 		await this.fetchDeposits()
 		await this.fetchMethods()
@@ -142,18 +124,17 @@ export default {
 
 	methods: {
 		async pay() {
+			if(this.amount < 30) {
+				this.errors['amount'] = ['Минимальная сумма пополнения 30 USDT']
+				return
+			}
+
 			const response = (await this.$axios.post('/payments/deposit', {
-				amount: this.amount,
-				card_number: this.card_number,
-				card_expiration: this.card_expiration,
-				card_cvv: this.card_cvv,
+				amount: this.amount
 			})).data
 			if(response.code === 200) {
 				this.$toast.success(response.message)
-				this.amount = 0
-				this.card_number = ''
-				this.card_expiration = ''
-				this.card_cvv = ''
+				this.amount = 30
 				this.errors = []
 				await this.fetchDeposits()
 				this.modal = true
