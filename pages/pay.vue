@@ -85,7 +85,7 @@
 								<b>Сумма к оплате:</b> {{ amount }} USDT
 							</div>
 						</div>
-						<div class="modal__footer mt-5">
+						<div class="modal__footer mt-4">
 							<button class="btn btn-dark" @click="closeModal">Закрыть</button>
 						</div>
 					</div>
