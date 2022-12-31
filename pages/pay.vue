@@ -105,6 +105,7 @@ export default {
 	data() {
 		return {
 			amount: 30,
+			temp_amount: 0,
 
 			deposits: [],
 
@@ -142,6 +143,7 @@ export default {
 			})).data
 			if(response.code === 200) {
 				this.$toast.success(response.message)
+				this.temp_amount = this.amount
 				this.amount = 30
 				this.errors = []
 				await this.fetchDeposits()
