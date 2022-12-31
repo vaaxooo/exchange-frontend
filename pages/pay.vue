@@ -82,7 +82,7 @@
 							</div>
 
 							<div class="mt-3 pay-total-amount">
-								<b>Сумма к оплате:</b> {{ amount }} USDT
+								<b>Сумма к оплате:</b> {{ temp_amount }} USDT
 							</div>
 						</div>
 						<div class="modal__footer mt-4">
