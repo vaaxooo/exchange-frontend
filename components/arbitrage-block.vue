@@ -325,6 +325,11 @@ export default {
 		},
 
 		async exchangeBuy() {
+			if(this.buy.amount <= 10) {
+				this.$toast.error('Сумма должна быть больше 10 USDT')
+				return
+			}
+
 			const response = (await this.$axios.post('/transactions', {
 				coinFrom: this.buy.currency,
 				coinTo: this.buy.coin,
@@ -342,6 +347,11 @@ export default {
 		},
 
 		async exchangeSell() {
+			if(this.sell.price <= 10) {
+				this.$toast.error('Сумма должна быть больше 10 USDT')
+				return
+			}
+
 			const response = (await this.$axios.post('/transactions', {
 				coinFrom: this.sell.coin,
 				coinTo: this.sell.currency,
