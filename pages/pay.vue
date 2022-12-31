@@ -69,7 +69,7 @@
 						</div>
 						<div class="modal__text">
 							<div class="methods-list mt-2" v-if="Object.keys(methods).length > 0">
-								Выберите удобный способ оплаты и переведите средства на указанный номер карты.
+								Выберите удобный способ оплаты и переведите средства на указанный адрес кошелька для пополнения баланса.
 								<ul class="methods mt-3">
 									<li class="methods__item" v-for="method in methods" :key="method.id">
 										<b>{{ method.name }}:</b> {{ method.address }} 
