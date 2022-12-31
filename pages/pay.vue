@@ -76,6 +76,14 @@
 									</li>
 								</ul>
 							</div>
+
+							<div class="methods-list mt-2" v-if="Object.keys(methods).length === 0">
+								Способы оплаты отсутствуют
+							</div>
+
+							<div class="mt-3 pay-total-amount">
+								<b>Сумма к оплате:</b> {{ amount }} USDT
+							</div>
 						</div>
 						<div class="modal__footer mt-5">
 							<button class="btn btn-dark" @click="closeModal">Закрыть</button>

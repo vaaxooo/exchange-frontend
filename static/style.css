@@ -555,6 +555,10 @@ img.site-logo {
     font-weight: 600
 }
 
+.mt-3.pay-total-amount {
+    font-size: 18px;
+}
+
 .vertical-align-item {
     margin-top: 30px!important
 }

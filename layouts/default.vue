@@ -1,7 +1,7 @@
 <template>
     <div class="layout layout-nav-side">
 		<layouts-default-menu />
-        <div class="main-container mt-5">
+        <div class="main-container mt-3">
             <div class="container">
                 <div class="row justify-content-center">
 					<Nuxt />
