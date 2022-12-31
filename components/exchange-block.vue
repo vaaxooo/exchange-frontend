@@ -52,7 +52,7 @@
 						<div class="exchange-info">
 							<div class="exchange-info-item">
 								<div class="exchange-info-item-title">Курс</div>
-								<div class="exchange-info-item-value">{{ exchange_rate }}</div>
+								<div class="exchange-info-item-value">{{ exchange_rate }} $</div>
 							</div>
 							<div class="exchange-info-item">
 
@@ -122,7 +122,7 @@
 						<div class="exchange-info">
 							<div class="exchange-info-item">
 								<div class="exchange-info-item-title">Курс</div>
-								<div class="exchange-info-item-value">{{ exchange_rate }}</div>
+								<div class="exchange-info-item-value">{{ exchange_rate }} $</div>
 							</div>
 							<div class="exchange-info-item">
 	

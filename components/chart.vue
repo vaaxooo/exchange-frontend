@@ -70,7 +70,7 @@ export default {
 		updateChart() {
 			document.querySelector('#trading_terminal').innerHTML = ''
 			const chart = createChart(document.querySelector('#trading_terminal'), { 
-				height: 384, 
+				height: 374, 
 			    timeScale: {
 					borderColor: "rgba(197, 203, 206, 0.8)",
 					timeVisible: true,
